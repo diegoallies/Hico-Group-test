@@ -53,12 +53,55 @@ function App() {
   const handleEmployeeSelect = (employee) => {
     setSelectedEmployee(employee);
   };
+
+  const clearSelectedEmployee = () => {
+    setSelectedEmployee(null);
+  };
+
+  const saveEmployee = async () => {
+    try {
+      if (selectedEmployee && selectedEmployee.id) {
+        // Update existing payroll
+        await axios.put(`api/update/payroll/${selectedEmployee.id}`, selectedEmployee);
+      } else {
+        // Add new payroll
+        await axios.post("api/create/list", selectedEmployee);
+      }
+
+      // Refresh the employee list
+      getPayrolls();
+      // Clear selected employee data
+      clearSelectedEmployee();
+    } catch (error) {
+      console.error("Error saving employee:", error);
+    }
+  };
+
+  const deleteEmployee = async () => {
+    try {
+      if (selectedEmployee && selectedEmployee.id) {
+        // Delete payroll by ID
+        await axios.delete(`api/delete/payroll/${selectedEmployee.id}`);
+        // Refresh the employee list
+        getPayrolls();
+        // Clear selected employee data
+        clearSelectedEmployee();
+      }
+    } catch (error) {
+      console.error("Error deleting employee:", error);
+    }
+  };
+
   return (
     <>
       <Header />
       <div className="container">
         <div className="employee-list">
           <h2>Current Employees</h2>
+           {/* Add Employee Button */}
+        <button type="button" className="btn btn-success" onClick={clearSelectedEmployee}>
+          Add Employee
+        </button>
           <table className="table">
             <thead>
               <tr>
@@ -235,13 +278,13 @@ function App() {
                     </div>
                   </div>
 
-                  <button type="submit" className="btn btn-success">
+                  <button type="submit" className="btn btn-success" onClick={saveEmployee}>
                     Save Changes
                   </button>
-                  <button type="submit" className="btn btn-warning">
+                  <button type="submit" className="btn btn-warning" onClick={clearSelectedEmployee}v>
                     Cancel Changes
                   </button>
-                  <button type="submit" className="btn btn-danger">
+                  <button type="submit" className="btn btn-danger" onClick={deleteEmployee}>
                     Delete Payroll
                   </button>
                 </div>
