@@ -18,6 +18,8 @@ import RadioInput from "./components/RadioInput";
 import CheckboxInput from "./components/CheckboxInput";
 import EmployeeTable from "./components/EmployeeTable";
 import DropdownInput from "./components/DropdownInput";
+import Button from "./components/Button"; 
+import Pagination from "./components/Pagination";
 
 
 function App() {
@@ -47,6 +49,17 @@ function App() {
     } catch (error) {
       console.error("Error saving employee:", error);
     }
+  };
+
+  const AddNewPayroll = () => {
+    setSelectedEmployee({
+      firstName: "",
+      lastName: "",
+      salutation: "", // Set the default salutation value if needed
+      gender: "", // Set the default gender value if needed
+      grossSalary: "",
+      employeeProfileColor: [],
+    });
   };
 
   const deleteEmployee = async () => {
@@ -87,66 +100,35 @@ function App() {
         <div className="employee-list">
           <div className="headd">
             <h2>Current Employees</h2>
-            <button
-              type="button"
-              className="btn btn-success"
-              onClick={clearSelectedEmployee}
-            >
-              Add Employee
-            </button>
+            <Button onClick={AddNewPayroll} label="Add Payroll" style="btn-success" />
           </div>
-
           <EmployeeTable payrolls={currentPayrolls} onSelect={handleEmployeeSelect} />
-
-
-          <div className="pagination">
-            {Array.from(
-              { length: Math.ceil(payrollsList.length / itemsPerPage) },
-              (_, index) => (
-                <button
-                  key={index + 1}
-                  onClick={() => paginate(index + 1)}
-                  className={currentPage === index + 1 ? "active" : ""}
-                >
-                  {index + 1}
-                </button>
-              )
-            )}
-          </div>
+          <Pagination totalPages={Math.ceil(payrollsList.length / itemsPerPage)} currentPage={currentPage} onPageChange={paginate} />
         </div>
 
         {selectedEmployee && (
         <div className="employee-information">
-          <h2>Employee Information</h2>
+          <h2 style={{ marginBottom: '35px' }}> Employee Information</h2>
           <form>
             <div className="form-wrapper">
-              <div className="left-column">
-                <FormInput label="First Name" value={selectedEmployee.firstName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, firstName: value })} />
-                <FormInput label="Last Name" value={selectedEmployee.lastName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, lastName: value })} />
-
-                <DropdownInput label="Salutation" value={selectedEmployee.salutation} options={salutationOptions} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, salutation: value })} />
-
-                <RadioInput options={genderOptions} selectedValue={selectedEmployee.gender} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, gender: value })} />
-              </div>
-              <div className="right-column">
-                <FormInput label="Full Name" value={`${selectedEmployee.firstName || ""} ${selectedEmployee.lastName || ""}`} disabled />
-                <FormInput label="Gross Salary" type="number" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} />
-                
-                <CheckboxInput options={colorOptions} selectedValues={selectedEmployee.employeeProfileColor} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeProfileColor: value })} />
-                <button type="submit" className="btn btn-success" onClick={saveEmployee}>
-              Save Changes
-            </button>
-            <button type="submit" className="btn btn-warning" onClick={clearSelectedEmployee}>
-              Cancel Changes
-            </button>
-            <button type="submit" className="btn btn-danger" onClick={deleteEmployee}>
-              Delete Payroll
-            </button>
-              </div>
-              
+            <div className="left-column">
+              <FormInput label="First Name" value={selectedEmployee.firstName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, firstName: value })} />
+              <FormInput label="Last Name" value={selectedEmployee.lastName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, lastName: value })} />
+              <DropdownInput label="Salutation" value={selectedEmployee.salutation} options={salutationOptions} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, salutation: value })} />
+              <RadioInput options={genderOptions} selectedValue={selectedEmployee.gender} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, gender: value })} />
+              <FormInput label="Employee ID" value={selectedEmployee.employeeId} />
             </div>
 
-           
+              <div className="right-column">
+                <FormInput label="Full Name" value={`${selectedEmployee.firstName || ""} ${selectedEmployee.lastName || ""}`} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, fullName: value })} className="full-width" disabled />
+                <FormInput label="Gross Salary" type="number" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} className="full-width" />
+                  
+                <CheckboxInput options={colorOptions} selectedValues={selectedEmployee.employeeProfileColor} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeProfileColor: value })}  />
+                <Button onClick={saveEmployee} label="Save Changes" style="btn-success" />
+                <Button onClick={clearSelectedEmployee} label="Cancel Changes" style="btn-warning" />
+                <Button onClick={deleteEmployee} label="Delete Payroll" style="btn-danger" />
+              </div>
+            </div>  
           </form>
         </div>
       )}

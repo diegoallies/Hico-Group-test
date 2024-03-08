@@ -87,6 +87,7 @@ body {
 .right-column {
   flex: 1;
   margin: 0 15px;
+  width: 450px;
 }
 
 .form-group {
@@ -113,7 +114,7 @@ label {
 
 .color-options {
   display: flex;
-  gap: 80px; /* Adjust the gap as needed */
+  gap: 18px; /* Adjust the gap as needed */
 }
 
 .color-options label {
@@ -180,3 +181,61 @@ label {
 .btn-success:hover {
   background-color: #012340; /* Darker color on hover */
 }
+
+
+.input-label {
+  display: inline-block;
+  margin-right: 10px;  /* Adjust the margin as needed */
+}
+
+.input-container {
+  display: flex;
+
+  align-items: center;
+}
+
+.input-container label {
+  flex: 0 0 2%;  /* Set a fixed width for the labels (adjust as needed) */
+}
+
+.input-container input {
+  flex: 1;
+  margin-left: 8px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
+.form-group label {
+  margin-right: 8px;
+  width: 100px;  /* Set a fixed width for the labels (adjust as needed) */
+}
+
+.form-control {
+  flex: 1;
+  box-sizing: border-box;
+  max-width: 100%; /* Set a maximum width to prevent overflowing */
+}
+
+
+.form-control.full-width {
+  width: 100%; /* Ensure "Full Name" and "Gross Salary" fields take full width */
+}
+
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkbox-item {
+  margin-right: 20px;  /* Adjust the margin as needed */
+}
+
+.form-group .checkbox-container {
+  max-width: calc(100% - 120px);  /* Adjust the max-width to leave space for label and margin */
+}
+
+/* Add more specific styles if needed */

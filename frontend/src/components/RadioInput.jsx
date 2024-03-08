@@ -2,23 +2,22 @@
 import React from "react";
 
 const RadioInput = ({ options, selectedValue, onChange }) => (
-  <div className="form-group" style={{ display: "flex", flexDirection: "row" }}>
-    <label>Gender:</label>
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      {options.map((option) => (
-        <div className="radio-item" key={option.value}>
-          <input
-            type="radio"
-            id={option.value}
-            name="gender"
-            value={option.value}
-            checked={selectedValue === option.value}
-            onChange={() => onChange(option.value)}
-          />
-          <label htmlFor={option.value}>{option.label}</label>
-        </div>
-      ))}
-    </div>
+  <div className="form-group" style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+    <label style={{ marginRight: "10px" }}>Gender:</label>
+    {options.map((option) => (
+      <div key={option.value} style={{ display: "flex", alignItems: "center", marginRight: "15px" }}>
+        <input
+          type="radio"
+          id={option.value}
+          name="gender"
+          value={option.value}
+          checked={selectedValue === option.value}
+          onChange={() => onChange(option.value)}
+          style={{ marginRight: "5px" }}
+        />
+        <label htmlFor={option.value}>{option.label}</label>
+      </div>
+    ))}
   </div>
 );
 
