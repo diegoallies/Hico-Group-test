@@ -1,7 +1,7 @@
+// App.jsx - Main component
 import React, { useEffect, useState } from "react";
+import Header from "./components/Header";
 import "./App.css";
-import Header from "./components/header";
-import axios from "axios";
 import {
   genderOptions,
   salutationOptions,
@@ -13,6 +13,11 @@ import {
   createPayroll,
   deletePayroll,
 } from "../src/api/payrollApi.jsx";
+import FormInput from "./components/FormInput";
+import RadioInput from "./components/RadioInput";
+import CheckboxInput from "./components/CheckboxInput";
+import EmployeeTable from "./components/EmployeeTable";
+
 
 function App() {
   const [payrollsList, setPayrollsList] = useState([]);
@@ -47,7 +52,7 @@ function App() {
     try {
       if (selectedEmployee && selectedEmployee.id) {
         await deletePayroll(selectedEmployee.id);
-        getPayrolls();
+        fetchPayrolls();
         clearSelectedEmployee();
       }
     } catch (error) {
@@ -90,31 +95,7 @@ function App() {
             </button>
           </div>
 
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Employee #</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Salutation</th>
-                <th>Profile Color</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentPayrolls.map((employee) => (
-                <tr
-                  key={employee.id}
-                  onClick={() => handleEmployeeSelect(employee)}
-                >
-                  <td>{employee.employeeId}</td>
-                  <td>{employee.firstName}</td>
-                  <td>{employee.lastName}</td>
-                  <td>{employee.salutation}</td>
-                  <td>{employee.employeeProfileColor}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <EmployeeTable payrolls={currentPayrolls} onSelect={handleEmployeeSelect} />
 
           {/* Pagination buttons */}
           <div className="pagination">
@@ -139,157 +120,30 @@ function App() {
             <form>
               <div className="form-wrapper">
                 <div className="left-column">
-                  <div className="form-group">
-                    <label>First Name:</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={selectedEmployee.firstName || ""}
-                      onChange={(e) =>
-                        setSelectedEmployee({
-                          ...selectedEmployee,
-                          firstName: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Last Name:</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={selectedEmployee.lastName || ""}
-                      onChange={(e) =>
-                        setSelectedEmployee({
-                          ...selectedEmployee,
-                          lastName: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Salutation:</label>
-                    <select
-                      className="form-control"
-                      value={selectedEmployee.salutation || ""}
-                      onChange={(e) =>
-                        setSelectedEmployee({
-                          ...selectedEmployee,
-                          salutation: e.target.value,
-                        })
-                      }
-                    >
-                      {salutationOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <FormInput label="First Name" value={selectedEmployee.firstName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, firstName: value })} />
+                  <FormInput label="Last Name" value={selectedEmployee.lastName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, lastName: value })} />
+                  <FormInput label="Salutation" value={selectedEmployee.salutation} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, salutation: value })} />
 
-                  <div
-                    className="form-group"
-                    style={{ display: "flex", flexDirection: "row" }}
-                  >
-                    <label>Gender:</label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      {genderOptions.map((option) => (
-                        <div className="radio-item" key={option.value}>
-                          <input
-                            type="radio"
-                            id={option.value}
-                            name="gender"
-                            value={option.value}
-                            checked={selectedEmployee.gender === option.value}
-                            onChange={() =>
-                              setSelectedEmployee({
-                                ...selectedEmployee,
-                                gender: option.value,
-                              })
-                            }
-                          />
-                          <label htmlFor={option.value}>{option.label}</label>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <RadioInput options={genderOptions} selectedValue={selectedEmployee.gender} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, gender: value })} />
                 </div>
                 <div className="right-column">
-                  <div className="form-group">
-                    <label>Full Name:</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={`${selectedEmployee.firstName || ""} ${
-                        selectedEmployee.lastName || ""
-                      }`}
-                      disabled
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Gross Salary:</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      placeholder="Gross Salary"
-                      value={selectedEmployee.grossSalary || ""}
-                      onChange={(e) =>
-                        setSelectedEmployee({
-                          ...selectedEmployee,
-                          grossSalary: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Profile Color:</label>
-                    <div className="color-options">
-                      {colorOptions.map((option) => (
-                        <label key={option.value}>
-                          <input
-                            type="checkbox"
-                            value={option.value}
-                            checked={
-                              selectedEmployee.employeeProfileColor ===
-                              option.value
-                            }
-                            onChange={() =>
-                              setSelectedEmployee({
-                                ...selectedEmployee,
-                                employeeProfileColor: option.value,
-                              })
-                            }
-                          />
-                          {option.label}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="btn btn-success"
-                    onClick={saveEmployee}
-                  >
-                    Save Changes
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-warning"
-                    onClick={clearSelectedEmployee}
-                    v
-                  >
-                    Cancel Changes
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-danger"
-                    onClick={deleteEmployee}
-                  >
-                    Delete Payroll
-                  </button>
+                  <FormInput label="Full Name" value={`${selectedEmployee.firstName || ""} ${selectedEmployee.lastName || ""}`} disabled />
+                  <FormInput label="Gross Salary" type="number" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} />
+                  
+                  <CheckboxInput options={colorOptions} selectedValues={selectedEmployee.employeeProfileColor} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeProfileColor: value })} />
+                  <button type="submit" className="btn btn-success" onClick={saveEmployee}>
+                Save Changes
+              </button>
+              <button type="submit" className="btn btn-warning" onClick={clearSelectedEmployee}>
+                Cancel Changes
+              </button>
+              <button type="submit" className="btn btn-danger" onClick={deleteEmployee}>
+                Delete Payroll
+              </button>
                 </div>
               </div>
+
+             
             </form>
           </div>
         )}
