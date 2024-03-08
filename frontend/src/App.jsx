@@ -58,7 +58,7 @@ function App() {
       <Header />
       <div className="container">
         <div className="employee-list">
-          <h2>Employee List</h2>
+          <h2>Current Employees</h2>
           <table className="table">
             <thead>
               <tr>

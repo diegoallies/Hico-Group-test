@@ -138,6 +138,19 @@ label {
   font-size: 16px;
   transition: background-color 0.3s; /* Smooth transition on hover */
 }
+
+/* App.css */
+
+.table tr {
+  cursor: pointer; /* Set cursor to pointer on table rows */
+}
+
+.table tr:hover {
+  background-color: #f5f5f5;
+  cursor: pointer; /* Set cursor to pointer on hover */
+}
+
+
 .btn-danger {
   background-color: #A4BEDB; /* New color */
   color: #BB2D3B;
