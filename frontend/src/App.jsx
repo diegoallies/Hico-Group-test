@@ -245,7 +245,7 @@ function App() {
                   <div className="form-group">
                     <label>Gross Salary:</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       placeholder="Gross Salary"
                       value={selectedEmployee.grossSalary || ""}
