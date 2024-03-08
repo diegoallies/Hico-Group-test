@@ -1,7 +1,8 @@
 /* App.css */
 
 body {
-  font-size: 15px; /* Reduced base font size for smaller elements */
+  font-size: 15px; 
+  margin: 0;
 }
 
 .container {
@@ -9,6 +10,7 @@ body {
   margin-left: 12.5%;
   margin-left: 12.5%;
   width: 80%;
+
 }
 
 .content {
@@ -81,7 +83,9 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  flex-grow: 1;
 }
+
 
 .left-column,
 .right-column {
@@ -128,6 +132,7 @@ label {
 .btn {
   margin-left: 20px;
   width: 175px;
+  margin-top: 35px;
 }
 .btn-success {
   background-color: #A4BEDB; /* New color */
