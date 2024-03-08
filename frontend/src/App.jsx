@@ -133,10 +133,7 @@ function App() {
                 <FormInput label="Gross Salary" type="number" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} />
                 
                 <CheckboxInput options={colorOptions} selectedValues={selectedEmployee.employeeProfileColor} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeProfileColor: value })} />
-              </div>
-            </div>
-
-            <button type="submit" className="btn btn-success" onClick={saveEmployee}>
+                <button type="submit" className="btn btn-success" onClick={saveEmployee}>
               Save Changes
             </button>
             <button type="submit" className="btn btn-warning" onClick={clearSelectedEmployee}>
@@ -145,6 +142,11 @@ function App() {
             <button type="submit" className="btn btn-danger" onClick={deleteEmployee}>
               Delete Payroll
             </button>
+              </div>
+              
+            </div>
+
+           
           </form>
         </div>
       )}
