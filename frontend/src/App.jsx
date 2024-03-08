@@ -7,6 +7,12 @@ import {
   salutationOptions,
   colorOptions,
 } from "./configData/config.ts";
+import {
+  getPayrolls,
+  updatePayroll,
+  createPayroll,
+  deletePayroll,
+} from "../src/api/payrollApi.jsx";
 
 function App() {
   const [payrollsList, setPayrollsList] = useState([]);
@@ -14,18 +20,47 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
 
-  const getPayrolls = async () => {
+  const fetchPayrolls = async () => {
     try {
-      const { data } = await axios.get("api/show/payrolls");
+      const data = await getPayrolls();
       setPayrollsList(data);
     } catch (error) {
-      console.log(error, "the error axios");
+      console.error("Error fetching payrolls:", error);
     }
   };
 
+  const saveEmployee = async () => {
+    try {
+      if (selectedEmployee && selectedEmployee.id) {
+        await updatePayroll(selectedEmployee.id, selectedEmployee);
+      } else {
+        await createPayroll(selectedEmployee);
+      }
+      getPayrolls();
+      clearSelectedEmployee();
+    } catch (error) {
+      console.error("Error saving employee:", error);
+    }
+  };
+
+  const deleteEmployee = async () => {
+    try {
+      if (selectedEmployee && selectedEmployee.id) {
+        await deletePayroll(selectedEmployee.id);
+        getPayrolls();
+        clearSelectedEmployee();
+      }
+    } catch (error) {
+      console.error("Error deleting employee:", error);
+    }
+  };
+
+  
+
   useEffect(() => {
-    getPayrolls();
+    fetchPayrolls();
   }, []);
+
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -39,35 +74,6 @@ function App() {
 
   const clearSelectedEmployee = () => {
     setSelectedEmployee(null);
-  };
-
-  const saveEmployee = async () => {
-    try {
-      if (selectedEmployee && selectedEmployee.id) {
-        await axios.put(
-          `api/update/payroll/${selectedEmployee.id}`,
-          selectedEmployee
-        );
-      } else {
-        await axios.post("api/create/list", selectedEmployee);
-      }
-      getPayrolls();
-      clearSelectedEmployee();
-    } catch (error) {
-      console.error("Error saving employee:", error);
-    }
-  };
-
-  const deleteEmployee = async () => {
-    try {
-      if (selectedEmployee && selectedEmployee.id) {
-        await axios.delete(`api/delete/payroll/${selectedEmployee.id}`);
-        getPayrolls();
-        clearSelectedEmployee();
-      }
-    } catch (error) {
-      console.error("Error deleting employee:", error);
-    }
   };
 
   return (
