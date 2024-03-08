@@ -55,12 +55,9 @@ function App() {
     }
   };
 
-  
-
   useEffect(() => {
     fetchPayrolls();
   }, []);
-
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
