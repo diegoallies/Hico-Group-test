@@ -124,7 +124,10 @@ label {
 .color-options input {
   margin-right: 5px; /* Adjust the margin as needed */
 }
-
+.btn {
+  margin-left: 20px;
+  width: 175px;
+}
 .btn-success {
   background-color: #A4BEDB; /* New color */
   color: #012340;
@@ -134,7 +137,26 @@ label {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s; /* Smooth transition on hover */
-  /* margin-left: 70%; */
+}
+.btn-danger {
+  background-color: #A4BEDB; /* New color */
+  color: #BB2D3B;
+  border: 1px solid #BB2D3B;
+  padding: 12px 18px; /* Adjusted padding for a more balanced look */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s; /* Smooth transition on hover */
+}
+.btn-warning {
+  background-color: #A4BEDB; /* New color */
+  color:  #012340;
+  border: 1px solid  #012340;
+  padding: 12px 18px; /* Adjusted padding for a more balanced look */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s; /* Smooth transition on hover */
 }
 
 .btn-success:hover {

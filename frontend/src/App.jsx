@@ -212,7 +212,7 @@ function App() {
                   </div>
                   <div className="form-group">
                     <label>Profile Color:</label>
-                    <div className="color-options">  
+                    <div className="color-options">
                       {colorOptions.map((option) => (
                         <label key={option.value}>
                           <input
@@ -237,6 +237,12 @@ function App() {
 
                   <button type="submit" className="btn btn-success">
                     Save Changes
+                  </button>
+                  <button type="submit" className="btn btn-warning">
+                    Cancel Changes
+                  </button>
+                  <button type="submit" className="btn btn-danger">
+                    Delete Payroll
                   </button>
                 </div>
               </div>
