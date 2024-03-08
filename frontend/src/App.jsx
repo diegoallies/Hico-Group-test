@@ -212,9 +212,9 @@ function App() {
                   </div>
                   <div className="form-group">
                     <label>Profile Color:</label>
-                    <div>
+                    <div className="color-options">  
                       {colorOptions.map((option) => (
-                        <div key={option.value}>
+                        <label key={option.value}>
                           <input
                             type="checkbox"
                             value={option.value}
@@ -228,9 +228,9 @@ function App() {
                                 employeeProfileColor: option.value,
                               })
                             }
-                          />{" "}
+                          />
                           {option.label}
-                        </div>
+                        </label>
                       ))}
                     </div>
                   </div>
