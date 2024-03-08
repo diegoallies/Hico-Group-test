@@ -7,7 +7,7 @@ function App() {
   const [payrollsList, setPayrollsList] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(4); 
+  const [itemsPerPage] = useState(4);
 
   const getPayrolls = async () => {
     try {
@@ -33,9 +33,16 @@ function App() {
     { label: "Mx", value: "Mx" },
   ];
 
+  const colorOptions = [
+    { label: "Green", value: "Green" },
+    { label: "Blue", value: "Blue" },
+    { label: "Red", value: "Red" },
+    { label: "Default", value: "Default" },
+  ];
+
   useEffect(() => {
     getPayrolls();
-  }, []); 
+  }, []);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -206,64 +213,28 @@ function App() {
                   <div className="form-group">
                     <label>Profile Color:</label>
                     <div>
-                      <input
-                        type="checkbox"
-                        value="Green"
-                        checked={
-                          selectedEmployee.employeeProfileColor === "Green"
-                        }
-                        onChange={() =>
-                          setSelectedEmployee({
-                            ...selectedEmployee,
-                            employeeProfileColor: "Green",
-                          })
-                        }
-                      />{" "}
-                      Green
-                      <input
-                        type="checkbox"
-                        value="Blue"
-                        checked={
-                          selectedEmployee.employeeProfileColor === "Blue"
-                        }
-                        onChange={() =>
-                          setSelectedEmployee({
-                            ...selectedEmployee,
-                            employeeProfileColor: "Blue",
-                          })
-                        }
-                      />{" "}
-                      Blue
-                      <input
-                        type="checkbox"
-                        value="Red"
-                        checked={
-                          selectedEmployee.employeeProfileColor === "Red"
-                        }
-                        onChange={() =>
-                          setSelectedEmployee({
-                            ...selectedEmployee,
-                            employeeProfileColor: "Red",
-                          })
-                        }
-                      />{" "}
-                      Red
-                      <input
-                        type="checkbox"
-                        value="Default"
-                        checked={
-                          selectedEmployee.employeeProfileColor === "Default"
-                        }
-                        onChange={() =>
-                          setSelectedEmployee({
-                            ...selectedEmployee,
-                            employeeProfileColor: "Default",
-                          })
-                        }
-                      />{" "}
-                      Default
+                      {colorOptions.map((option) => (
+                        <div key={option.value}>
+                          <input
+                            type="checkbox"
+                            value={option.value}
+                            checked={
+                              selectedEmployee.employeeProfileColor ===
+                              option.value
+                            }
+                            onChange={() =>
+                              setSelectedEmployee({
+                                ...selectedEmployee,
+                                employeeProfileColor: option.value,
+                              })
+                            }
+                          />{" "}
+                          {option.label}
+                        </div>
+                      ))}
                     </div>
                   </div>
+
                   <button type="submit" className="btn btn-success">
                     Save Changes
                   </button>

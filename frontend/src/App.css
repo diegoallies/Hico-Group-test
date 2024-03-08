@@ -1,114 +1,124 @@
 /* App.css */
 
+body { 
+  font-size: 15px; /* Reduced base font size for smaller elements */
+}
+
 .container {
-  margin: 20px;
+margin: 15px;  /* Reduced margin */
 }
 
 .employee-list {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+background-color: #f0f0f0;
+padding: 15px;  /* Reduced padding */
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
 }
 
 .table th, .table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
+border: 1px solid #ddd;
+padding: 8px;  /* Reduced padding */
+text-align: left;
+font-size: 14px;  /* Reduced font size */
 }
 
 .table th {
-  background-color: #023150;
-  color: white;
+background-color: #023150;
+color: white;
 }
 
 .table tr:hover {
-  background-color: #f5f5f5;
+background-color: #f5f5f5;
 }
 
 .pagination {
-  margin-top: 20px;
+margin-top: 20px;
 }
 
 .pagination button {
-  background-color: #023150;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  margin: 0 5px;
-  cursor: pointer;
-  border-radius: 4px;
+background-color: #023150;
+color: white;
+border: none;
+padding: 10px 15px;
+margin: 0 5px;
+cursor: pointer;
+border-radius: 4px;
 }
 
 .pagination button.active {
-  background-color: #023150;
+background-color: #023150;
 }
 
 .employee-information {
-  margin-top: 20px;
-  padding: 30px; /* Increased padding */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+margin-top: 20px;
+padding: 20px; /* Reduced padding */
+border: 1px solid #ddd;
+border-radius: 8px;
+background-color: #fff;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .employee-form {
-  width: 100%;
+width: 100%;
 }
 
 .form-wrapper {
-  display: flex;
-  justify-content: space-between;
-    margin-bottom: 20px; /* Added margin */
+display: flex;
+justify-content: space-between;
+margin-bottom: 20px; 
 }
 
 .left-column,
 .right-column {
-  flex: 1;
-    margin: 0 15px; /* Added side margins */
+flex: 1;
+margin: 0 15px; 
 }
 
 .form-group {
-  margin-bottom: 20px; /* Increased for more separation */
+margin-bottom: 20px; 
+}
+
+.radio-item {
+  width: 100px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 label {
-  display: block;
-  margin-bottom: 10px; /* Increased for more separation */
-  font-weight: bold;
+display: block;
+margin-bottom: 10px; 
+font-weight: bold;
 }
 
-/* Increased width for radio buttons and checkboxes */
 input[type="radio"], 
 input[type="checkbox"] {
-  width: 25px; 
-  height: 25px;
-  margin-right: 10px; /* Adds space to the right of checkboxes/radios */ 
+width: 25px; 
+height: 25px;
+margin-right: 10px; 
 }
 
 .input-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;  /* Increased gap between elements */
+display: flex;
+align-items: center;
+gap: 10px; 
 }
 
 .btn-success {
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  padding: 12px 15px; /* Increased padding for a larger button */
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+background-color: #28a745;
+color: #fff;
+border: none;
+padding: 10px 12px; /* Reduced padding */
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
 }
 
 .btn-success:hover {
-  background-color: #218838;
+background-color: #218838;
 }
