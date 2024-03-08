@@ -95,13 +95,17 @@ function App() {
   return (
     <>
       <Header />
+      
       <div className="container">
+        
         <div className="employee-list">
+          <div className="headd">
           <h2>Current Employees</h2>
-           {/* Add Employee Button */}
-        <button type="button" className="btn btn-success" onClick={clearSelectedEmployee}>
+          <button type="button" className="btn btn-success" onClick={clearSelectedEmployee}>
           Add Employee
         </button>
+          </div>
+          
           <table className="table">
             <thead>
               <tr>

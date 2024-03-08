@@ -138,6 +138,11 @@ label {
   font-size: 16px;
   transition: background-color 0.3s; /* Smooth transition on hover */
 }
+.headd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 /* App.css */
 
