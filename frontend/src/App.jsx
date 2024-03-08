@@ -56,10 +56,10 @@ function App() {
     setSelectedEmployee({
       firstName: "",
       lastName: "",
-      salutation: "", // Set the default salutation value if needed
-      gender: "", // Set the default gender value if needed
+      salutation: "", 
+      gender: "", 
       grossSalary: "",
-      employeeProfileColor: [],
+      employeeProfileColor: 'Default',
     });
   };
 
