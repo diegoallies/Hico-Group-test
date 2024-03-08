@@ -1,5 +1,4 @@
 import React from "react";
-import "../App.css";  // Make sure to import your CSS file
 
 const FormInput = ({ label, value, onChange, type = "text", disabled = false }) => (
   <div className="form-group">
