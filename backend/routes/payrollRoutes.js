@@ -1,5 +1,5 @@
 const express = require('express');
-const { createDB, createTable, createList, showpayrolls, singlepayroll, updatepayroll, deleteSinglepayroll } = require('../controllers/payrollsController');
+const { createDB, createTable, createList, showpayrolls, singlepayroll, updatepayroll, deleteSinglepayroll } = require('../controllers/payrollController');
 const router = express.Router();
 
 
