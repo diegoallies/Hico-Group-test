@@ -18,6 +18,12 @@ function App() {
     }
   };
 
+  const genderOptions = [
+    { label: "Male", value: "Male" },
+    { label: "Female", value: "Female" },
+    { label: "Unspecified", value: "Unspecified" },
+  ];
+
   useEffect(() => {
     getPayrolls();
   }, []); // Empty dependency array to run only once
@@ -138,54 +144,24 @@ function App() {
                   >
                     <label>Gender:</label>
                     <div style={{ display: "flex", flexDirection: "row" }}>
-                      <div>
-                        <input
-                          type="radio"
-                          id="male"
-                          name="gender"
-                          value="Male"
-                          checked={selectedEmployee.gender === "Male"}
-                          onChange={() =>
-                            setSelectedEmployee({
-                              ...selectedEmployee,
-                              gender: "Male",
-                            })
-                          }
-                        />
-                        <label htmlFor="male">Male</label>
-                      </div>
-                      <div>
-                        <input
-                          type="radio"
-                          id="female"
-                          name="gender"
-                          value="Female"
-                          checked={selectedEmployee.gender === "Female"}
-                          onChange={() =>
-                            setSelectedEmployee({
-                              ...selectedEmployee,
-                              gender: "Female",
-                            })
-                          }
-                        />
-                        <label htmlFor="female">Female</label>
-                      </div>
-                      <div>
-                        <input
-                          type="radio"
-                          id="unspecified"
-                          name="gender"
-                          value="Unspecified"
-                          checked={selectedEmployee.gender === "Unspecified"}
-                          onChange={() =>
-                            setSelectedEmployee({
-                              ...selectedEmployee,
-                              gender: "Unspecified",
-                            })
-                          }
-                        />
-                        <label htmlFor="unspecified">Unspecified</label>
-                      </div>
+                      {genderOptions.map((option) => (
+                        <div className="radio-item" key={option.value}>
+                          <input
+                            type="radio"
+                            id={option.value}
+                            name="gender"
+                            value={option.value}
+                            checked={selectedEmployee.gender === option.value}
+                            onChange={() =>
+                              setSelectedEmployee({
+                                ...selectedEmployee,
+                                gender: option.value,
+                              })
+                            }
+                          />
+                          <label htmlFor={option.value}>{option.label}</label>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
