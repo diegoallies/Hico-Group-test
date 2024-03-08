@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header";
 import axios from "axios";
+import {
+  genderOptions,
+  salutationOptions,
+  colorOptions,
+} from "./configData/config";
 
 function App() {
   const [payrollsList, setPayrollsList] = useState([]);
@@ -18,27 +23,27 @@ function App() {
     }
   };
 
-  const genderOptions = [
-    { label: "Male", value: "Male" },
-    { label: "Female", value: "Female" },
-    { label: "Unspecified", value: "Unspecified" },
-  ];
+  // const genderOptions = [
+  //   { label: "Male", value: "Male" },
+  //   { label: "Female", value: "Female" },
+  //   { label: "Unspecified", value: "Unspecified" },
+  // ];
 
-  const salutationOptions = [
-    { label: "Select Salutation", value: "" },
-    { label: "Dr", value: "Dr" },
-    { label: "Mr", value: "Mr" },
-    { label: "Ms", value: "Ms" },
-    { label: "Mrs", value: "Mrs" },
-    { label: "Mx", value: "Mx" },
-  ];
+  // const salutationOptions = [
+  //   { label: "Select Salutation", value: "" },
+  //   { label: "Dr", value: "Dr" },
+  //   { label: "Mr", value: "Mr" },
+  //   { label: "Ms", value: "Ms" },
+  //   { label: "Mrs", value: "Mrs" },
+  //   { label: "Mx", value: "Mx" },
+  // ];
 
-  const colorOptions = [
-    { label: "Green", value: "Green" },
-    { label: "Blue", value: "Blue" },
-    { label: "Red", value: "Red" },
-    { label: "Default", value: "Default" },
-  ];
+  // const colorOptions = [
+  //   { label: "Green", value: "Green" },
+  //   { label: "Blue", value: "Blue" },
+  //   { label: "Red", value: "Red" },
+  //   { label: "Default", value: "Default" },
+  // ];
 
   useEffect(() => {
     getPayrolls();
@@ -61,16 +66,14 @@ function App() {
   const saveEmployee = async () => {
     try {
       if (selectedEmployee && selectedEmployee.id) {
-        // Update existing payroll
-        await axios.put(`api/update/payroll/${selectedEmployee.id}`, selectedEmployee);
+        await axios.put(
+          `api/update/payroll/${selectedEmployee.id}`,
+          selectedEmployee
+        );
       } else {
-        // Add new payroll
         await axios.post("api/create/list", selectedEmployee);
       }
-
-      // Refresh the employee list
       getPayrolls();
-      // Clear selected employee data
       clearSelectedEmployee();
     } catch (error) {
       console.error("Error saving employee:", error);
@@ -80,11 +83,8 @@ function App() {
   const deleteEmployee = async () => {
     try {
       if (selectedEmployee && selectedEmployee.id) {
-        // Delete payroll by ID
         await axios.delete(`api/delete/payroll/${selectedEmployee.id}`);
-        // Refresh the employee list
         getPayrolls();
-        // Clear selected employee data
         clearSelectedEmployee();
       }
     } catch (error) {
@@ -95,17 +95,20 @@ function App() {
   return (
     <>
       <Header />
-      
+
       <div className="container">
-        
         <div className="employee-list">
           <div className="headd">
-          <h2>Current Employees</h2>
-          <button type="button" className="btn btn-success" onClick={clearSelectedEmployee}>
-          Add Employee
-        </button>
+            <h2>Current Employees</h2>
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={clearSelectedEmployee}
+            >
+              Add Employee
+            </button>
           </div>
-          
+
           <table className="table">
             <thead>
               <tr>
@@ -282,13 +285,26 @@ function App() {
                     </div>
                   </div>
 
-                  <button type="submit" className="btn btn-success" onClick={saveEmployee}>
+                  <button
+                    type="submit"
+                    className="btn btn-success"
+                    onClick={saveEmployee}
+                  >
                     Save Changes
                   </button>
-                  <button type="submit" className="btn btn-warning" onClick={clearSelectedEmployee}v>
+                  <button
+                    type="submit"
+                    className="btn btn-warning"
+                    onClick={clearSelectedEmployee}
+                    v
+                  >
                     Cancel Changes
                   </button>
-                  <button type="submit" className="btn btn-danger" onClick={deleteEmployee}>
+                  <button
+                    type="submit"
+                    className="btn btn-danger"
+                    onClick={deleteEmployee}
+                  >
                     Delete Payroll
                   </button>
                 </div>
