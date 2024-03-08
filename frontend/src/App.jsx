@@ -6,7 +6,7 @@ import {
   genderOptions,
   salutationOptions,
   colorOptions,
-} from "./configData/config";
+} from "./configData/config.ts";
 
 function App() {
   const [payrollsList, setPayrollsList] = useState([]);
@@ -22,28 +22,6 @@ function App() {
       console.log(error, "the error axios");
     }
   };
-
-  // const genderOptions = [
-  //   { label: "Male", value: "Male" },
-  //   { label: "Female", value: "Female" },
-  //   { label: "Unspecified", value: "Unspecified" },
-  // ];
-
-  // const salutationOptions = [
-  //   { label: "Select Salutation", value: "" },
-  //   { label: "Dr", value: "Dr" },
-  //   { label: "Mr", value: "Mr" },
-  //   { label: "Ms", value: "Ms" },
-  //   { label: "Mrs", value: "Mrs" },
-  //   { label: "Mx", value: "Mx" },
-  // ];
-
-  // const colorOptions = [
-  //   { label: "Green", value: "Green" },
-  //   { label: "Blue", value: "Blue" },
-  //   { label: "Red", value: "Red" },
-  //   { label: "Default", value: "Default" },
-  // ];
 
   useEffect(() => {
     getPayrolls();
