@@ -36,7 +36,7 @@ function App() {
       } else {
         await createPayroll(selectedEmployee);
       }
-      getPayrolls();
+      fetchPayrolls();
       clearSelectedEmployee();
     } catch (error) {
       console.error("Error saving employee:", error);
