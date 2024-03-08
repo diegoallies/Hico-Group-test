@@ -125,13 +125,51 @@ function App() {
                 <NumberInput label="Gross Salary" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} className="full-width" />
                   
                 <CheckboxInput options={colorOptions} selectedValues={selectedEmployee.employeeProfileColor} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeProfileColor: value })}  />
-                <Button onClick={saveEmployee} label="Save Changes" style="btn-success" />
+
+
+                <Button onClick={saveEmployee} label="Save Changes" style="btn-success" colorr={selectedEmployee.employeeProfileColor}  />
+
+                
                 <Button onClick={clearSelectedEmployee} label="Cancel Changes" style="btn-warning" />
                 <Button onClick={deleteEmployee} label="Delete Payroll" style="btn-danger" />
               </div>
             </div>  
           </form>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       )}
       </div>
     </>

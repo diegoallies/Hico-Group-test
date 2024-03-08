@@ -244,3 +244,30 @@ label {
 }
 
 /* Add more specific styles if needed */
+
+.redProfile {
+  background-color: #f55656; /* Light red */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.greenProfile {
+  background-color: #61a161; /* Light green */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.blueProfile {
+  background-color: #3939a8; /* Light blue */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}

@@ -19,5 +19,5 @@ export const colorOptions = [
   { label: "Green", value: "Green" },
   { label: "Blue", value: "Blue" },
   { label: "Red", value: "Red" },
-  { label: "Default", value: "Default" },
+  { label: "Default", value: "#A4BEDB" },
 ];
