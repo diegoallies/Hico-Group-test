@@ -1,25 +1,29 @@
 import React from "react";
 
-const FormInput = ({ label, value, onChange, type = "text", disabled = false }) => (
-  <div className="form-group">
-    <label>{label}:</label>
-    {type === "text" ? (
+const FormInput = ({ label, value, onChange, type = "text", disabled = false, alphabeticOnly = false }) => {
+  const handleInputChange = (e) => {
+    let inputValue = e.target.value;
+
+    if (alphabeticOnly) {
+
+      inputValue = inputValue.replace(/[^A-Za-z]/g, '');
+    }
+
+    onChange(inputValue);
+  };
+
+  return (
+    <div className="form-group">
+      <label>{label}:</label>
       <input
         type={type}
         className="form-control"
         value={value || ""}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={handleInputChange}
         disabled={disabled}
       />
-    ) : (
-      <input
-        type={type}
-        className="form-control"
-        value={value || ""}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    )}
-  </div>
-);
+    </div>
+  );
+};
 
 export default FormInput;
