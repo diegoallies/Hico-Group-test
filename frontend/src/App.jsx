@@ -20,6 +20,7 @@ import EmployeeTable from "./components/EmployeeTable";
 import DropdownInput from "./components/DropdownInput";
 import Button from "./components/Button"; 
 import Pagination from "./components/Pagination";
+import NumberInput from "./components/NumberInput";
 
 
 function App() {
@@ -116,12 +117,12 @@ function App() {
               <FormInput label="Last Name" value={selectedEmployee.lastName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, lastName: value })} />
               <DropdownInput label="Salutation" value={selectedEmployee.salutation} options={salutationOptions} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, salutation: value })} />
               <RadioInput options={genderOptions} selectedValue={selectedEmployee.gender} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, gender: value })} />
-              <FormInput label="Employee ID" value={selectedEmployee.employeeId} />
+              <FormInput label="Employee ID" value={selectedEmployee.employeeId} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeId: value })} />
             </div>
 
               <div className="right-column">
                 <FormInput label="Full Name" value={`${selectedEmployee.firstName || ""} ${selectedEmployee.lastName || ""}`} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, fullName: value })} className="full-width" disabled />
-                <FormInput label="Gross Salary" type="number" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} className="full-width" />
+                <NumberInput label="Gross Salary" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} className="full-width" />
                   
                 <CheckboxInput options={colorOptions} selectedValues={selectedEmployee.employeeProfileColor} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeProfileColor: value })}  />
                 <Button onClick={saveEmployee} label="Save Changes" style="btn-success" />
