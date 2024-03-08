@@ -20,7 +20,7 @@ import EmployeeTable from "./components/EmployeeTable";
 import DropdownInput from "./components/DropdownInput";
 import Button from "./components/Button"; 
 import Pagination from "./components/Pagination";
-import NumberInput from "./components/NumberInput";
+import NumberInput from "./components/CurruncryNumberInput.jsx";
 
 
 function App() {

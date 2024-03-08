@@ -19,7 +19,11 @@ const EmployeeTable = ({ payrolls, onSelect }) => (
           <td>{employee.firstName}</td>
           <td>{employee.lastName}</td>
           <td>{employee.salutation}</td>
-          <td>{employee.employeeProfileColor}</td>
+          <td>
+            {employee.employeeProfileColor === "#A4BEDB"
+              ? "Default"
+              : employee.employeeProfileColor}
+          </td>
         </tr>
       ))}
     </tbody>
