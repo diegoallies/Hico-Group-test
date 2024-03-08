@@ -24,6 +24,15 @@ function App() {
     { label: "Unspecified", value: "Unspecified" },
   ];
 
+  const salutationOptions = [
+    { label: "Select Salutation", value: "" },
+    { label: "Dr", value: "Dr" },
+    { label: "Mr", value: "Mr" },
+    { label: "Ms", value: "Ms" },
+    { label: "Mrs", value: "Mrs" },
+    { label: "Mx", value: "Mx" },
+  ];
+
   useEffect(() => {
     getPayrolls();
   }, []); // Empty dependency array to run only once
@@ -132,12 +141,14 @@ function App() {
                         })
                       }
                     >
-                      <option value="">Select Salutation</option>
-                      <option value="Mr">Mr</option>
-                      <option value="Miss">Miss</option>
-                      {/* Add other salutation options here */}
+                      {salutationOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
                     </select>
                   </div>
+
                   <div
                     className="form-group"
                     style={{ display: "flex", flexDirection: "row" }}
