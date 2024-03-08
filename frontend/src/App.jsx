@@ -7,7 +7,7 @@ function App() {
   const [payrollsList, setPayrollsList] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(4); // Set the number of items per page
+  const [itemsPerPage] = useState(4); 
 
   const getPayrolls = async () => {
     try {
@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     getPayrolls();
-  }, []); // Empty dependency array to run only once
+  }, []); 
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
