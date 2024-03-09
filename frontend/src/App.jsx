@@ -1,6 +1,6 @@
 // App.jsx - Main component
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
+import Header from "./components/Header.tsx";
 import "./App.css";
 import {
   genderOptions,
@@ -13,15 +13,15 @@ import {
   createPayroll,
   deletePayroll,
 } from "../src/api/payrollApi.jsx";
-import FormInput from "./components/FormInput";
-import RadioInput from "./components/RadioInput";
-import CheckboxInput from "./components/CheckboxInput";
-import EmployeeTable from "./components/EmployeeTable";
-import DropdownInput from "./components/DropdownInput";
-import Button from "./components/Button"; 
-import Pagination from "./components/Pagination";  
-import NumberInput from "./components/NumberInput.jsx";
-import CurrencyNumberInput from "./components/CurrencyNumberInput.jsx";
+import FormInput from "./components/FormInput.tsx";
+import RadioInput from "./components/RadioInput.tsx";
+import CheckboxInput from "./components/CheckboxInput.tsx";
+import EmployeeTable from "./components/EmployeeTable.tsx";
+import DropdownInput from "./components/DropdownInput.tsx";
+import Button from "./components/Button.tsx"; 
+import Pagination from "./components/Pagination.tsx";  
+import NumberInput from "./components/NumberInput.tsx";
+import CurrencyNumberInput from "./components/CurrencyNumberInput.tsx";
 
 
 function App() {
