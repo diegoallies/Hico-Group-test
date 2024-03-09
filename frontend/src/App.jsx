@@ -80,6 +80,20 @@ function App() {
     fetchPayrolls();
   }, []);
 
+useEffect(() => {
+  if (selectedEmployee && selectedEmployee.salutation) {
+    const newGender = selectedEmployee.salutation.toLowerCase() === "dr" ? selectedEmployee.gender : 
+                      selectedEmployee.salutation.toLowerCase() === "mr" ? "Male" :
+                      selectedEmployee.salutation.toLowerCase() === "mrs" || selectedEmployee.salutation.toLowerCase() === "ms" ? "Female" :
+                      "Unspecified";
+
+    setSelectedEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      gender: newGender
+    }));
+  }
+}, [selectedEmployee]);
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentPayrolls = payrollsList.slice(indexOfFirstItem, indexOfLastItem);

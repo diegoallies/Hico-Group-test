@@ -11,7 +11,7 @@ const RadioInput = ({ options, selectedValue, onChange }) => (
           id={option.value}
           name="gender"
           value={option.value}
-          checked={selectedValue === option.value}
+          checked={selectedValue === option.value}  // Ensure the selectedValue prop is used here
           onChange={() => onChange(option.value)}
           style={{ marginRight: "5px" }}
         />
