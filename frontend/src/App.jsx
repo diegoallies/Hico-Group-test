@@ -96,9 +96,7 @@ useEffect(() => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPayrolls = Array.isArray(payrollsList) 
-                            ? payrollsList.slice(indexOfFirstItem, indexOfLastItem)
-                            : []; 
+  const currentPayrolls = payrollsList.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
