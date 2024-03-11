@@ -17,40 +17,9 @@ exports.createTable = (req, res) => {
   });
 };
 
-// // CREATE Payroll
-// exports.createList = (req, res) => {
-//   const q = sqlQueries.createListQuery;
-
-//   const {
-//     employeeId,
-//     firstName,
-//     lastName,
-//     salutation,
-//     employeeProfileColor,
-//     grossSalary,
-//     gender,
-//   } = req.body;
-
-//   const payrollData = {
-//     employeeId,
-//     firstName,
-//     lastName,
-//     salutation,
-//     employeeProfileColor,
-//     grossSalary,
-//     gender,
-//   };
-
-//   db.query(q, payrollData, (err, result) => {
-//     if (err) return res.json(err);
-//     return res.status(200).json(result);
-//   });
-// };
-
 // CREATE Payroll
 exports.createList = (req, res) => {
   const q = sqlQueries.createListQuery;
-  console.log(q, 'thi s')
 
   const {
     employeeId,
@@ -77,6 +46,7 @@ exports.createList = (req, res) => {
     return res.status(200).json(result);
   });
 };
+
 
 // CREATE TABLE IF NOT EXISTS
 exports.createTableIfNotExists = (db) => {
