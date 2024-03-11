@@ -1,6 +1,6 @@
 const mysql = require("mysql");
-require("dotenv").config(); // Load environment variables from .env file
-const payrollController = require("../controllers/payrollController"); // Import payroll controller
+require("dotenv").config();
+const PayrollModel = require("../models/payrollModel");
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -12,17 +12,22 @@ const db = mysql.createConnection({
 db.connect(async (error) => {
   if (error) throw error;
 
-  // Step 1: Check if the database exists, create it if not
-  await payrollController.createDatabaseIfNotExists(db);
+  try {
+    // Step 1: Check if the database exists, create it if not
+    await PayrollModel.createDatabaseIfNotExists(db);
+    console.log()
 
-  // Step 2: Use the created database
-  db.changeUser({ database: process.env.DB_DATABASE }, (err) => {
-    if (err) throw err;
-    console.log(`Using database: ${process.env.DB_DATABASE}`);
+    // Step 2: Use the created database
+    db.changeUser({ database: process.env.DB_DATABASE }, (err) => {
+      if (err) throw err;
+      console.log(`Using database: ${process.env.DB_DATABASE}`);
 
-    // Step 3: Check if the table exists, create it if not
-    payrollController.createTableIfNotExists(db);
-  });
+      // Step 3: Check if the table exists, create it if not
+      PayrollModel.createTableIfNotExists(db);
+    });
+  } catch (err) {
+    console.error("Error:", err.message);
+  }
 });
 
 module.exports = db;
