@@ -60,6 +60,48 @@ exports.createList = (req, res) => {
     return res.status(200).json(result);
   });
 };
+// Move the createTableIfNotExists function here
+exports.createTableIfNotExists = (db) => {
+  const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS payroll_list (
+        id INT AUTO_INCREMENT,
+        employeeId INT,
+        firstName VARCHAR(255) COLLATE utf8mb4_general_ci,
+        lastName VARCHAR(255) COLLATE utf8mb4_general_ci,
+        salutation VARCHAR(10) COLLATE utf8mb4_general_ci,
+        employeeProfileColor VARCHAR(7) COLLATE utf8mb4_general_ci, 
+        grossSalary VARCHAR(255),
+        gender VARCHAR(15) COLLATE utf8mb4_general_ci,
+        PRIMARY KEY(id)
+    )
+  `;
+
+  db.query(createTableQuery, (err) => {
+    if (err) {
+      console.error("Error creating table:", err);
+    } else {
+      console.log("Table 'payroll_list' is ready");
+    }
+  });
+};
+
+
+
+// Move the createDatabaseIfNotExists function here
+exports.createDatabaseIfNotExists = async (db) => {
+  return new Promise((resolve, reject) => {
+    const createDatabaseQuery = `CREATE DATABASE IF NOT EXISTS ${process.env.DB_DATABASE}`;
+
+    db.query(createDatabaseQuery, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(`Database '${process.env.DB_DATABASE}' is ready`);
+        resolve();
+      }
+    });
+  });
+};
 
 //SHOW payrollS
 exports.showpayrolls = (req, res) => {
