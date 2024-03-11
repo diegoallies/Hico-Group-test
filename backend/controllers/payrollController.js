@@ -123,6 +123,7 @@ exports.singlepayroll = (req, res) => {
   });
 };
 
+
 // UPDATE payroll
 exports.updatepayroll = (req, res) => {
   const {
