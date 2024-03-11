@@ -55,6 +55,7 @@ function App() {
 
   const AddNewPayroll = () => {
     setSelectedEmployee({
+      employeeId: "",
       firstName: "",
       lastName: "",
       salutation: "", 
