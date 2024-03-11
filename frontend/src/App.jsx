@@ -12,7 +12,7 @@ import {
   updatePayroll,
   createPayroll,
   deletePayroll,
-} from "../src/api/payrollApi.jsx";
+} from "./api/payrollApi.jsx";
 import FormInput from "./components/FormInput.tsx";
 import RadioInput from "./components/RadioInput.tsx";
 import CheckboxInput from "./components/CheckboxInput.tsx";
@@ -77,8 +77,23 @@ function App() {
   };
 
   useEffect(() => {
+    const fetchPayrolls = async () => {
+      try {
+        const data = await getPayrolls();
+        // Check if data is an array before updating the state
+        if (Array.isArray(data)) {
+          setPayrollsList(data);
+        } else {
+          console.error('Data fetched is not an array:', data);
+        }
+      } catch (error) {
+        console.error('Error fetching payrolls:', error);
+      }
+    };
+  
     fetchPayrolls();
   }, []);
+  
 
 useEffect(() => {
   if (selectedEmployee && selectedEmployee.salutation) {
@@ -96,7 +111,9 @@ useEffect(() => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPayrolls = payrollsList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentPayrolls = Array.isArray(payrollsList) 
+                            ? payrollsList.slice(indexOfFirstItem, indexOfLastItem)
+                            : []; 
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
