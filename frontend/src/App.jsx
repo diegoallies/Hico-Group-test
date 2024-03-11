@@ -95,19 +95,28 @@ function App() {
   }, []);
   
 
-useEffect(() => {
-  if (selectedEmployee && selectedEmployee.salutation) {
-    const newGender = selectedEmployee.salutation.toLowerCase() === "dr" ? selectedEmployee.gender : 
-                      selectedEmployee.salutation.toLowerCase() === "mr" ? "Male" :
-                      selectedEmployee.salutation.toLowerCase() === "mrs" || selectedEmployee.salutation.toLowerCase() === "ms" ? "Female" :
-                      "Unspecified";
-
-    setSelectedEmployee((prevEmployee) => ({
-      ...prevEmployee,
-      gender: newGender
-    }));
-  }
-}, [selectedEmployee]);
+  useEffect(() => {
+    if (selectedEmployee && selectedEmployee.salutation) {
+      const newGender =
+        selectedEmployee.salutation.toLowerCase() === "dr"
+          ? selectedEmployee.gender
+          : selectedEmployee.salutation.toLowerCase() === "mr"
+          ? "Male"
+          : selectedEmployee.salutation.toLowerCase() === "mrs" ||
+            selectedEmployee.salutation.toLowerCase() === "ms"
+          ? "Female"
+          : "Unspecified";
+  
+      // Check if the gender is actually changing before updating the state
+      if (newGender !== selectedEmployee.gender) {
+        setSelectedEmployee((prevEmployee) => ({
+          ...prevEmployee,
+          gender: newGender,
+        }));
+      }
+    }
+  }, [selectedEmployee]);
+  
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
