@@ -5,8 +5,7 @@ const FormInput = ({ label, value, onChange, type = "text", disabled = false, al
     let inputValue = e.target.value;
 
     if (alphabeticOnly) {
-
-      inputValue = inputValue.replace(/[^A-Za-z]/g, '');
+      inputValue = inputValue.replace(/[^A-Za-z\s]/g, '');
     }
 
     onChange(inputValue);
