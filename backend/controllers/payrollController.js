@@ -7,6 +7,10 @@ exports.createDB = (req, res) => {
     if (err) throw err;
     return res.status(201).json("DB created");
   });
+  db.query(sqlQueries.showSinglePayrollQuery2, (err, result) => {
+    if (err) throw err;
+    return res.status(201).json("DB created");
+  });
 };
 
 // CREATE TABLE
@@ -59,6 +63,19 @@ exports.createTableIfNotExists = (db) => {
   });
 };
 
+// CREATE SP for updating payroll
+exports.updatePayrollSpInit = (db) => {
+  db.query(sqlQueries.updatePayrollSpInit, (err) => {
+    if (err) {
+      console.error("Error creating sp:", err);
+    } else {
+      console.log("SP CREATED SUCCESSFULLY");
+    }
+  });
+};
+
+
+
 // CREATE DATABASE IF NOT EXISTS
 exports.createDatabaseIfNotExists = async (db) => {
   return new Promise((resolve, reject) => {
@@ -93,6 +110,8 @@ exports.singlepayroll = (req, res) => {
   });
 };
 
+
+
 // UPDATE payroll
 exports.updatepayroll = (req, res) => {
   const {
@@ -105,7 +124,8 @@ exports.updatepayroll = (req, res) => {
     gender,
   } = req.body;
 
-  const q = sqlQueries.updatePayrollQuery(req.params.id, {
+  // Create the employeeData object
+  const employeeData = {
     employeeId,
     firstName,
     lastName,
@@ -113,13 +133,22 @@ exports.updatepayroll = (req, res) => {
     employeeProfileColor,
     grossSalary,
     gender,
-  });
+  }
+
+  console.log(employeeData , 'employeeData')
+
+  const q = sqlQueries.updatePayrollQuery(req.params.id, employeeData);
 
   db.query(q, (err, result) => {
-    if (err) return res.json(err);
-    return res.status(200).json(result);
+    if (err) {
+      console.error("Error updating payroll:", err); 
+      return res.status(500).json({ error: "Error updating payroll" }); 
+    }
+
+    return res.status(200).json({ message: "Payroll updated successfully" });
   });
 };
+
 
 //DELETE SINGLE payroll
 exports.deleteSinglepayroll = (req, res) => {

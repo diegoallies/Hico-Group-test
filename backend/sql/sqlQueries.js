@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deletePayrollQuery = exports.updatePayrollQuery = exports.showSinglePayrollQuery = exports.showPayrollsQuery = exports.createListQuery = exports.createTableQuery = exports.createDatabaseQuery = void 0;
+exports.deletePayrollQuery = exports.updatePayrollSpInit = exports.updatePayrollQuery = exports.showSinglePayrollQuery = exports.showPayrollsQuery = exports.createListQuery = exports.createTableQuery = exports.createDatabaseQuery = void 0;
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');
@@ -15,19 +15,23 @@ exports.createTableQuery = readSQLFile('create_table');
 exports.createListQuery = readSQLFile('insert_payroll');
 exports.showPayrollsQuery = readSQLFile('show_payrolls');
 exports.showSinglePayrollQuery = readSQLFile('show_single_payroll');
-// Inside sqlQueries.js
-// ...
+exports.updatePayrollSpInit = readSQLFile('update_payroll_sp');
+
 
 exports.updatePayrollQuery = (id, employeeData) => {
-    const sql = readSQLFile('update_payroll');
-
-    let i = 0; // Declare 'i' 
-    const updatedSql = sql.replace(/\?/g, () => {
-        const value = employeeData[Object.keys(employeeData)[i++]]; 
-        return mysql.escape(value); 
-    });
-
-    return updatedSql;
+    console.log(employeeData, 'employeeData')
+    // Option 1: Directly construct the query string
+    return `CALL update_payroll(
+            ${mysql.escape(id)},
+            ${mysql.escape(employeeData.employeeId)},
+            ${mysql.escape(employeeData.firstName)},
+            ${mysql.escape(employeeData.lastName)},
+            ${mysql.escape(employeeData.salutation)},
+            ${mysql.escape(employeeData.employeeProfileColor)},
+            ${mysql.escape(employeeData.grossSalary)}, 
+            ${mysql.escape(employeeData.gender)}
+        )`; 
 };
+  
 
 exports.deletePayrollQuery = readSQLFile('delete_payroll');
