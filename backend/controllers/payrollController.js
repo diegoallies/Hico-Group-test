@@ -7,10 +7,6 @@ exports.createDB = (req, res) => {
     if (err) throw err;
     return res.status(201).json("DB created");
   });
-  db.query(sqlQueries.showSinglePayrollQuery2, (err, result) => {
-    if (err) throw err;
-    return res.status(201).json("DB created");
-  });
 };
 
 // CREATE TABLE
@@ -73,6 +69,17 @@ exports.updatePayrollSpInit = (db) => {
     }
   });
 };
+// CREATE SP for updating payroll
+exports.deletePayrollSpInit = (db) => {
+  db.query(sqlQueries.deletePayrollSpInit, (err) => {
+    if (err) {
+      console.error("Error creating sp delete:", err);
+    } else {
+      console.log("SP delete CREATED SUCCESSFULLY");
+    }
+  });
+};
+
 
 
 

@@ -16,6 +16,7 @@ exports.createListQuery = readSQLFile('insert_payroll');
 exports.showPayrollsQuery = readSQLFile('show_payrolls');
 exports.showSinglePayrollQuery = readSQLFile('show_single_payroll');
 exports.updatePayrollSpInit = readSQLFile('update_payroll_sp');
+exports.deletePayrollSpInit = readSQLFile('delete_payroll_sp');
 
 
 exports.updatePayrollQuery = (id, employeeData) => {
@@ -34,4 +35,6 @@ exports.updatePayrollQuery = (id, employeeData) => {
 };
   
 
-exports.deletePayrollQuery = readSQLFile('delete_payroll');
+exports.deletePayrollQuery = (id) => {
+    return `CALL delete_payroll(${mysql.escape(id)})`; 
+};

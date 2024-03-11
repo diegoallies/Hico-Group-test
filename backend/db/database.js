@@ -21,7 +21,8 @@ db.connect(async (error) => {
     console.log(`Using database: ${process.env.DB_DATABASE}`);
 
     payrollController.createTableIfNotExists(db);
-    payrollController.updatePayrollSpInit(db)
+    payrollController.updatePayrollSpInit(db);
+    payrollController.deletePayrollSpInit(db);
 
   });
 });
