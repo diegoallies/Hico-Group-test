@@ -1,4 +1,4 @@
-Certainly! Here is the plain text for your README.md file:
+Certainly! Here is a comprehensive README.md that combines all the information:
 
 ```markdown
 # <Diego_Allies_Assignment>
@@ -12,6 +12,7 @@ Certainly! Here is the plain text for your README.md file:
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Database Setup](#database-setup)
+- [Frontend Setup](#frontend-setup)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [SQL Files](#sql-files)
@@ -23,11 +24,16 @@ Certainly! Here is the plain text for your README.md file:
 1. Clone the repository:
 
 ```bash
-git clone <repository_url>
-cd <repository_directory>
+git clone https://github.com/diegoallies/Hico-Group-test
 ```
 
-2. Install dependencies:
+2. Navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+3. Install dependencies:
 
 ```bash
 npm install
@@ -35,7 +41,12 @@ npm install
 
 ## Configuration
 
-1. Create a `.env` file in the root of the project:
+```javascript
+// payrollApi.jsx
+const apiEndpoint = "http://localhost:3000/api"; 
+```
+
+2. Create a `.env` file in the root of the project:
 
 ```env
 DB_HOST=localhost
@@ -44,7 +55,7 @@ DB_PASSWORD=<your_database_password>
 DB_DATABASE=payroll_database
 ```
 
-2. Modify the values according to your database configuration.
+3. Modify the values according to your database configuration.
 
 ## Database Setup
 
@@ -56,15 +67,83 @@ DB_DATABASE=payroll_database
 npm run start
 ```
 
-## Usage
+## Frontend Setup
 
-Start the application:
+### Prerequisites
+
+- Node.js and npm installed on your machine. [Download Node.js](https://nodejs.org/)
+
+### Installation
+
+1. Clone the repository:
 
 ```bash
-npm start
+git clone https://github.com/diegoallies/Hico-Group-test
+cd frontend
 ```
 
+2. Navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Navigate to the frontend directory:
+
+```bash
+cd ..
+cd backened
+```
+
+5. Install dependencies:
+
+```bash
+npm install
+```
+
+### Usage
+
+Start the frontend application:
+
+```bash
+npm run start
+```
+Run on backened && frontend
+
 The application will be available at [http://localhost:3000](http://localhost:3000).
+
+## Frontend Structure
+
+### Components
+
+- **Header.tsx**: Displays the application header.
+- **Button.tsx**: Reusable button component.
+- **CheckboxInput.tsx**: Reusable checkbox input component.
+- **NumberInput.tsx**: Reusable number input component.
+- **CurrencyNumberInput.tsx**: Reusable currency number input component.
+- **DropdownInput.tsx**: Reusable dropdown input component.
+- **RadioInput.tsx**: Reusable radio input component.
+- **EmployeeTable.tsx**: Reusable employee table component.
+- **FormInput.tsx**: Reusable form input component.
+- **Pagination.tsx**: Reusable pagination component.
+
+### Configuration Data
+
+- **config.ts**: Contains configuration data such as gender options, salutation options, and color options.
+
+### App.jsx
+
+The main application component. Manages the state, fetches data from the API, and renders the UI.
+
+### Styling
+
+- **App.css**: Contains styles for the application.
 
 ## API Endpoints
 
@@ -119,7 +198,6 @@ The application will be available at [http://localhost:3000](http://localhost:30
 - `update_payroll_sp.sql`: SQL script to create the stored procedure for updating payroll.
 - `delete_payroll_sp.sql`: SQL script to create the stored procedure for deleting payroll.
 - `show_single_payroll_sp.sql`: SQL script to create the stored procedure for retrieving a single payroll.
-
 
 ## License
 

@@ -180,17 +180,17 @@ label {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s; /* Smooth transition on hover */
+  transition: background-color 0.3s; 
 }
 
 .btn-success:hover {
-  background-color: #012340; /* Darker color on hover */
+  background-color: #012340; 
 }
 
 
 .input-label {
   display: inline-block;
-  margin-right: 10px;  /* Adjust the margin as needed */
+  margin-right: 10px; 
 }
 
 .input-container {
@@ -200,7 +200,7 @@ label {
 }
 
 .input-container label {
-  flex: 0 0 2%;  /* Set a fixed width for the labels (adjust as needed) */
+  flex: 0 0 2%; 
 }
 
 .input-container input {
@@ -215,18 +215,18 @@ label {
 
 .form-group label {
   margin-right: 8px;
-  width: 100px;  /* Set a fixed width for the labels (adjust as needed) */
+  width: 100px; 
 }
 
 .form-control {
   flex: 1;
   box-sizing: border-box;
-  max-width: 100%; /* Set a maximum width to prevent overflowing */
+  max-width: 100%; 
 }
 
 
 .form-control.full-width {
-  width: 100%; /* Ensure "Full Name" and "Gross Salary" fields take full width */
+  width: 100%; 
 }
 
 
@@ -236,17 +236,16 @@ label {
 }
 
 .checkbox-item {
-  margin-right: 20px;  /* Adjust the margin as needed */
+  margin-right: 20px;
 }
 
 .form-group .checkbox-container {
-  max-width: calc(100% - 120px);  /* Adjust the max-width to leave space for label and margin */
+  max-width: calc(100% - 120px); 
 }
 
-/* Add more specific styles if needed */
 
 .redProfile {
-  background-color: #f55656; /* Light red */
+  background-color: #f55656; 
   color: white;
   border: none;
   padding: 10px 15px;
@@ -255,7 +254,7 @@ label {
 }
 
 .greenProfile {
-  background-color: #61a161; /* Light green */
+  background-color: #61a161; 
   color: white;
   border: none;
   padding: 10px 15px;
@@ -264,7 +263,7 @@ label {
 }
 
 .blueProfile {
-  background-color: #3939a8; /* Light blue */
+  background-color: #3939a8;
   color: white;
   border: none;
   padding: 10px 15px;
