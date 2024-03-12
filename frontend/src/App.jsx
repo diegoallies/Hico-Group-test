@@ -1,4 +1,3 @@
-// App.jsx - Main component
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header.tsx";
 import "./App.css";
@@ -14,31 +13,32 @@ import {
   deletePayroll,
   GetPayrollById,
 } from "./api/payrollApi.jsx";
-import FormInput from "./components/FormInput.tsx";
-import RadioInput from "./components/RadioInput.tsx";
-import CheckboxInput from "./components/CheckboxInput.tsx";
-import EmployeeTable from "./components/EmployeeTable.tsx";
-import DropdownInput from "./components/DropdownInput.tsx";
-import Button from "./components/Button.tsx"; 
-import Pagination from "./components/Pagination.tsx";  
-import NumberInput from "./components/NumberInput.tsx";
-import CurrencyNumberInput from "./components/CurrencyNumberInput.tsx";
+import {
+  FormInput,
+  RadioInput,
+  CheckboxInput,
+  EmployeeTable,
+  DropdownInput,
+  Button,
+  Pagination,
+  NumberInput,
+  CurrencyNumberInput,
+} from "./components"; // Assuming you have an index.js file in the components folder
 
+const ITEMS_PER_PAGE = 4;
 
-function App() {
+const App = () => {
   const [payrollsList, setPayrollsList] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoadingEmployee, setIsLoadingEmployee] = useState(false); // Loading state
-  const [isLoadingPayrolls, setIsLoadingPayrolls] = useState(false); // For list load
-  const [itemsPerPage] = useState(4);
+  const [isLoadingEmployee, setIsLoadingEmployee] = useState(false);
 
   const fetchPayrolls = async () => {
     try {
       const data = await getPayrolls();
-      setPayrollsList(data);
+      Array.isArray(data) ? setPayrollsList(data) : console.error('Data fetched is not an array:', data);
     } catch (error) {
-      console.error("Error fetching payrolls:", error);
+      console.error('Error fetching payrolls:', error);
     }
   };
 
@@ -52,17 +52,17 @@ function App() {
       fetchPayrolls();
       clearSelectedEmployee();
     } catch (error) {
-      console.error("Error saving employee:", error);
+      console.error('Error saving employee:', error);
     }
   };
 
-  const AddNewPayroll = () => {
+  const addNewPayroll = () => {
     setSelectedEmployee({
       employeeId: "",
       firstName: "",
       lastName: "",
-      salutation: "", 
-      gender: "", 
+      salutation: "",
+      gender: "",
       grossSalary: "",
       employeeProfileColor: 'Default',
     });
@@ -76,42 +76,26 @@ function App() {
         clearSelectedEmployee();
       }
     } catch (error) {
-      console.error("Error deleting employee:", error);
+      console.error('Error deleting employee:', error);
     }
   };
 
   useEffect(() => {
-    const fetchPayrolls = async () => {
-      try {
-        const data = await getPayrolls();
-        // Check if data is an array before updating the state
-        if (Array.isArray(data)) {
-          setPayrollsList(data);
-        } else {
-          console.error('Data fetched is not an array:', data);
-        }
-      } catch (error) {
-        console.error('Error fetching payrolls:', error);
-      }
-    };
-  
     fetchPayrolls();
   }, []);
-  
 
   useEffect(() => {
     if (selectedEmployee && selectedEmployee.salutation) {
       const newGender =
-        selectedEmployee.salutation.toLowerCase() === "dr"
+        selectedEmployee.salutation.toLowerCase() === 'dr'
           ? selectedEmployee.gender
-          : selectedEmployee.salutation.toLowerCase() === "mr"
-          ? "Male"
-          : selectedEmployee.salutation.toLowerCase() === "mrs" ||
-            selectedEmployee.salutation.toLowerCase() === "ms"
-          ? "Female"
-          : "Unspecified";
-  
-      // Check if the gender is actually changing before updating the state
+          : selectedEmployee.salutation.toLowerCase() === 'mr'
+          ? 'Male'
+          : selectedEmployee.salutation.toLowerCase() === 'mrs' ||
+            selectedEmployee.salutation.toLowerCase() === 'ms'
+          ? 'Female'
+          : 'Unspecified';
+
       if (newGender !== selectedEmployee.gender) {
         setSelectedEmployee((prevEmployee) => ({
           ...prevEmployee,
@@ -120,37 +104,36 @@ function App() {
       }
     }
   }, [selectedEmployee]);
-  
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPayrolls = Array.isArray(payrollsList) 
-                            ? payrollsList.slice(indexOfFirstItem, indexOfLastItem)
-                            : []; 
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+  const currentPayrolls = Array.isArray(payrollsList)
+    ? payrollsList.slice(indexOfFirstItem, indexOfLastItem)
+    : [];
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleEmployeeSelect = async (employee) => {
     try {
-      fetchPayrollById(employee);
+      setIsLoadingEmployee(true);
+      await fetchPayrollById(employee);
     } catch (error) {
-      console.error("Error fetching payrolls:", error);
+      console.error('Error fetching payrolls:', error);
     } finally {
-        setIsLoadingEmployee(false);
+      setIsLoadingEmployee(false);
     }
-};
+  };
 
-const fetchPayrollById = async (employee) => {
-  try {
-    const data = await GetPayrollById(employee.id);
-    console.log(data.result[0][0], 'data')
-    
-    setSelectedEmployee(data.result[0][0]);
-  } catch (error) {
-    console.error("Error fetching payrolls:", error);
-  }
-};
+  const fetchPayrollById = async (employee) => {
+    try {
+      const data = await GetPayrollById(employee.id);
+      console.log(data.result[0][0], 'data');
 
+      setSelectedEmployee(data.result[0][0]);
+    } catch (error) {
+      console.error('Error fetching payrolls:', error);
+    }
+  };
 
   const clearSelectedEmployee = () => {
     setSelectedEmployee(null);
@@ -159,49 +142,44 @@ const fetchPayrollById = async (employee) => {
   return (
     <>
       <Header />
-
       <div className="container">
         <div className="employee-list">
           <div className="headd">
             <h2>Current Employees</h2>
-            <Button onClick={AddNewPayroll} label="Add Payroll" style="btn-success" />
+            <Button onClick={addNewPayroll} label="Add Payroll" style="btn-success" />
           </div>
           <EmployeeTable payrolls={currentPayrolls} onSelect={handleEmployeeSelect} />
-          <Pagination totalPages={Math.ceil(payrollsList.length / itemsPerPage)} currentPage={currentPage} onPageChange={paginate} />
+          <Pagination totalPages={Math.ceil(payrollsList.length / ITEMS_PER_PAGE)} currentPage={currentPage} onPageChange={paginate} />
         </div>
 
         {selectedEmployee && (
-        <div className="employee-information">
-          <h2 style={{ marginBottom: '35px' }}> Employee Information</h2>
-          {isLoadingEmployee ? (
-            <div>Loading payroll data...</div> 
-        ) : (
-          <form>
-            <div className="form-wrapper">
-              <div className="left-column">
-                <FormInput label="First Name" value={selectedEmployee.firstName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, firstName: value })} alphabeticOnly />
-                <FormInput label="Last Name" value={selectedEmployee.lastName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, lastName: value })} alphabeticOnly />
-                <DropdownInput label="Salutation" value={selectedEmployee.salutation} options={salutationOptions} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, salutation: value })} />
-                <RadioInput options={genderOptions} selectedValue={selectedEmployee.gender} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, gender: value })} />
-                <NumberInput label="Employee ID" value={selectedEmployee.employeeId} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeId: value })} />
-              </div>
+          <div className="employee-information">
+            <h2 style={{ marginBottom: '35px' }}> Employee Information</h2>
+              <form>
+                <div className="form-wrapper">
+                  <div className="left-column">
+                    <FormInput label="First Name" value={selectedEmployee.firstName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, firstName: value })} alphabeticOnly />
+                    <FormInput label="Last Name" value={selectedEmployee.lastName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, lastName: value })} alphabeticOnly />
+                    <DropdownInput label="Salutation" value={selectedEmployee.salutation} options={salutationOptions} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, salutation: value })} />
+                    <RadioInput options={genderOptions} selectedValue={selectedEmployee.gender} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, gender: value })} />
+                    <NumberInput label="Employee ID" value={selectedEmployee.employeeId} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeId: value })} />
+                  </div>
 
-              <div className="right-column">
-                <FormInput label="Full Name" value={`${selectedEmployee.firstName || ""} ${selectedEmployee.lastName || ""}`} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, fullName: value })} className="full-width" disabled />
-                <CurrencyNumberInput label="Gross Salary" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} className="full-width" />
-                <CheckboxInput options={colorOptions} selectedValues={selectedEmployee.employeeProfileColor} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeProfileColor: value })}  />
-                <Button onClick={saveEmployee} label="Save Changes" style="btn-success" colorr={selectedEmployee.employeeProfileColor}  />
-                <Button onClick={clearSelectedEmployee} label="Cancel Changes" style="btn-warning" />
-                <Button onClick={deleteEmployee} label="Delete Payroll" style="btn-danger" />
-              </div>
-            </div>  
-          </form>
-          )}
-        </div>
-      )}
+                  <div className="right-column">
+                    <FormInput label="Full Name" value={`${selectedEmployee.firstName || ''} ${selectedEmployee.lastName || ''}`} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, fullName: value })} className="full-width" disabled />
+                    <CurrencyNumberInput label="Gross Salary" value={selectedEmployee.grossSalary} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, grossSalary: value })} className="full-width" />
+                    <CheckboxInput options={colorOptions} selectedValues={selectedEmployee.employeeProfileColor} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeProfileColor: value })} />
+                    <Button onClick={saveEmployee} label="Save Changes" style="btn-success" colorr={selectedEmployee.employeeProfileColor} />
+                    <Button onClick={clearSelectedEmployee} label="Cancel Changes" style="btn-warning" />
+                    <Button onClick={deleteEmployee} label="Delete Payroll" style="btn-danger" />
+                  </div>
+                </div>
+              </form>
+          </div>
+        )}
       </div>
     </>
   );
-}
+};
 
 export default App;
