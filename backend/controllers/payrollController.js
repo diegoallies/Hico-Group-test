@@ -1,39 +1,22 @@
 const db = require("../db/database.js");
+const sqlQueries = require("../sql/sqlQueries.js");
 
-//CREATE DATABASE
 exports.createDB = (req, res) => {
-  let q = "CREATE DATABASE payroll_database";
-  db.query(q, (err, result) => {
+  db.query(sqlQueries.createDatabaseQuery, (err, result) => {
     if (err) throw err;
     return res.status(201).json("DB created");
   });
 };
 
-// CREATE TABLE
 exports.createTable = (req, res) => {
-  let q = `
-        CREATE TABLE payroll_list (
-            id INT AUTO_INCREMENT,
-            employeeId INT,
-            firstName VARCHAR(255) COLLATE utf8mb4_general_ci,
-            lastName VARCHAR(255) COLLATE utf8mb4_general_ci,
-            salutation VARCHAR(10) COLLATE utf8mb4_general_ci,
-            employeeProfileColor VARCHAR(7) COLLATE utf8mb4_general_ci, 
-            grossSalary VARCHAR(255),
-            gender VARCHAR(15) COLLATE utf8mb4_general_ci,
-            PRIMARY KEY(id)
-        )
-    `;
-
-  db.query(q, (err, result) => {
+  db.query(sqlQueries.createTableQuery, (err, result) => {
     if (err) throw err;
     return res.status(201).json("TABLE CREATED");
   });
 };
 
-// CREATE Payroll
 exports.createList = (req, res) => {
-  const q = "INSERT INTO payroll_list SET ?";
+  const q = sqlQueries.createListQuery;
 
   const {
     employeeId,
@@ -60,52 +43,62 @@ exports.createList = (req, res) => {
     return res.status(200).json(result);
   });
 };
-// Move the createTableIfNotExists function here
-exports.createTableIfNotExists = (db) => {
-  const createTableQuery = `
-    CREATE TABLE IF NOT EXISTS payroll_list (
-        id INT AUTO_INCREMENT,
-        employeeId INT,
-        firstName VARCHAR(255) COLLATE utf8mb4_general_ci,
-        lastName VARCHAR(255) COLLATE utf8mb4_general_ci,
-        salutation VARCHAR(10) COLLATE utf8mb4_general_ci,
-        employeeProfileColor VARCHAR(7) COLLATE utf8mb4_general_ci, 
-        grossSalary VARCHAR(255),
-        gender VARCHAR(15) COLLATE utf8mb4_general_ci,
-        PRIMARY KEY(id)
-    )
-  `;
 
-  db.query(createTableQuery, (err) => {
+exports.createTableIfNotExists = (db) => {
+  db.query(sqlQueries.createTableQuery, (err) => {
     if (err) {
       console.error("Error creating table:", err);
     } else {
-      console.log("Table 'payroll_list' is ready");
+      // console.log("Table 'payroll_list' is ready");
     }
   });
 };
 
+exports.updatePayrollSpInit = (db) => {
+  db.query(sqlQueries.updatePayrollSpInit, (err) => {
+    if (err) {
+      console.error("Error creating sp:", err);
+    } else {
+      // console.log("SP CREATED SUCCESSFULLY");
+    }
+  });
+};
 
+exports.deletePayrollSpInit = (db) => {
+  db.query(sqlQueries.deletePayrollSpInit, (err) => {
+    if (err) {
+      console.error("Error creating sp delete:", err);
+    } else {
+      // console.log("SP CREATED SUCCESSFULLY");
+    }
+  });
+};
 
-// Move the createDatabaseIfNotExists function here
+exports.ShowSinglePayrollSpInit = (db) => {
+  db.query(sqlQueries.ShowSinglePayrollSpInit, (err) => {
+    if (err) {
+      console.error("Error creating sp delete:", err);
+    } else {
+      // console.log("SP CREATED SUCCESSFULLY");
+    }
+  });
+};
+
 exports.createDatabaseIfNotExists = async (db) => {
   return new Promise((resolve, reject) => {
-    const createDatabaseQuery = `CREATE DATABASE IF NOT EXISTS ${process.env.DB_DATABASE}`;
-
-    db.query(createDatabaseQuery, (err) => {
+    db.query(sqlQueries.createDatabaseQuery, (err) => {
       if (err) {
         reject(err);
       } else {
-        console.log(`Database '${process.env.DB_DATABASE}' is ready`);
+        // console.log(`Database '${process.env.DB_DATABASE}' is ready`);
         resolve();
       }
     });
   });
 };
 
-//SHOW payrollS
 exports.showpayrolls = (req, res) => {
-  const q = "SELECT * FROM payroll_list";
+  const q = sqlQueries.showPayrollsQuery;
 
   db.query(q, (err, result) => {
     if (err) return res.json(err);
@@ -113,18 +106,6 @@ exports.showpayrolls = (req, res) => {
   });
 };
 
-//SHOW SINGLE payroll
-exports.singlepayroll = (req, res) => {
-  const q = `SELECT * FROM payroll_list where id=${req.params.id}`;
-
-  db.query(q, (err, result) => {
-    if (err) return res.json(err);
-    return res.status(200).json(result[0]);
-  });
-};
-
-
-// UPDATE payroll
 exports.updatepayroll = (req, res) => {
   const {
     employeeId,
@@ -136,31 +117,44 @@ exports.updatepayroll = (req, res) => {
     gender,
   } = req.body;
 
-  const q = `
-        UPDATE payroll_list 
-        SET 
-            employeeId = '${employeeId}',
-            firstName = '${firstName}',
-            lastName = '${lastName}',
-            salutation = '${salutation}',
-            employeeProfileColor = '${employeeProfileColor}',
-            grossSalary = '${grossSalary}',
-            gender = '${gender}'
-        WHERE id = ${req.params.id}
-    `;
+  const employeeData = {
+    employeeId,
+    firstName,
+    lastName,
+    salutation,
+    employeeProfileColor,
+    grossSalary,
+    gender,
+  };
+
+  console.log(employeeData, "employeeData");
+
+  const q = sqlQueries.updatePayrollQuery(req.params.id, employeeData);
 
   db.query(q, (err, result) => {
-    if (err) return res.json(err);
-    return res.status(200).json(result);
+    if (err) {
+      console.error("Error updating payroll:", err);
+      return res.status(500).json({ error: "Error updating payroll" });
+    }
+
+    return res.status(200).json({ message: "Payroll updated successfully" });
   });
 };
 
-//DELETE SINGLE payroll
 exports.deleteSinglepayroll = (req, res) => {
-  const q = `DELETE FROM payroll_list  WHERE id=${req.params.id}`;
+  const q = sqlQueries.deletePayrollQuery(req.params.id);
 
   db.query(q, (err, result) => {
     if (err) return res.json(err);
     return res.status(200).json({ data: "payroll deleted" });
+  });
+};
+
+exports.singlepayroll = (req, res) => {
+  const q = sqlQueries.showSinglePayrollQuery(req.params.id);
+
+  db.query(q, (err, result) => {
+    if (err) return res.json(err);
+    return res.status(200).json({ result });
   });
 };

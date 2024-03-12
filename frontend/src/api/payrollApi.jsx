@@ -39,4 +39,14 @@ const deletePayroll = async (id) => {
   }
 };
 
-export { getPayrolls, updatePayroll, createPayroll, deletePayroll };
+const GetPayrollById = async (id) => {
+  try {
+    const { data } = await axios.get(`api/payroll/${id}`);
+    return data;
+  } catch (error) {
+    console.error(`Error getting payroll with ID ${id}:`, error);
+    throw error;
+  }
+};
+
+export { getPayrolls, updatePayroll, createPayroll, deletePayroll , GetPayrollById};
