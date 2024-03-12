@@ -17,6 +17,9 @@
 - [Contributing](#contributing)
 - [License](#license)
 
+
+## Frontend Setup
+
 ## Installation
 
 1. Clone the repository:
@@ -28,7 +31,7 @@ git clone https://github.com/diegoallies/Hico-Group-test
 2. Navigate to the frontend directory:
 
 ```bash
-cd frontend
+cd backend
 ```
 
 3. Install dependencies:
@@ -39,12 +42,8 @@ npm install
 
 ## Configuration
 
-```javascript
-// payrollApi.jsx
-const apiEndpoint = "http://localhost:3000/api"; 
-```
 
-2. Create a `.env` file in the root of the project:
+1. Create a `.env` file in the backend folder of the project:
 
 ```env
 DB_HOST=localhost
@@ -53,7 +52,7 @@ DB_PASSWORD=<your_database_password>
 DB_DATABASE=payroll_database
 ```
 
-3. Modify the values according to your database configuration.
+2. Modify the values according to your database configuration.
 
 ## Database Setup
 
@@ -92,18 +91,8 @@ cd frontend
 npm install
 ```
 
-4. Navigate to the frontend directory:
 
-```bash
-cd ..
-cd backened
-```
 
-5. Install dependencies:
-
-```bash
-npm install
-```
 
 ### Usage
 
