@@ -160,7 +160,7 @@ const App = () => {
                     <FormInput label="Last Name" value={selectedEmployee.lastName} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, lastName: value })} alphabeticOnly />
                     <DropdownInput label="Salutation" value={selectedEmployee.salutation} options={salutationOptions} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, salutation: value })} />
                     <RadioInput options={genderOptions} selectedValue={selectedEmployee.gender} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, gender: value })} />
-                    <NumberInput label="Employee ID" value={selectedEmployee.employeeId} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeId: value })} />
+                    <NumberInput label="Employee #" value={selectedEmployee.employeeId} onChange={(value) => setSelectedEmployee({ ...selectedEmployee, employeeId: value })} />
                   </div>
 
                   <div className="right-column">

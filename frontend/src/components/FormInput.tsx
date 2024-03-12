@@ -13,7 +13,7 @@ const FormInput = ({ label, value, onChange, type = "text", disabled = false, al
 
   return (
     <div className="form-group">
-      <label>{label}</label>
+      <label>{label}{<span className="required">*</span>}</label>
       <input
         type={type}
         className="form-control"

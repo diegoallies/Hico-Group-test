@@ -3,7 +3,7 @@ import React from "react";
 
 const DropdownInput = ({ label, value, options, onChange }) => (
   <div className="form-group">
-    <label>{label}</label>
+    <label>{label}{<span className="required">*</span>}</label>
     <select
       className="form-control"
       value={value || ""}

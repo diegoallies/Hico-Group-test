@@ -260,3 +260,8 @@ label {
   cursor: pointer;
   border-radius: 4px;
 }
+
+.required {
+  color: red; 
+  margin-left: 5px;
+}
