@@ -12,6 +12,7 @@ import {
   updatePayroll,
   createPayroll,
   deletePayroll,
+  GetPayrollById,
 } from "./api/payrollApi.jsx";
 import FormInput from "./components/FormInput.tsx";
 import RadioInput from "./components/RadioInput.tsx";
@@ -28,6 +29,8 @@ function App() {
   const [payrollsList, setPayrollsList] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoadingEmployee, setIsLoadingEmployee] = useState(false); // Loading state
+  const [isLoadingPayrolls, setIsLoadingPayrolls] = useState(false); // For list load
   const [itemsPerPage] = useState(4);
 
   const fetchPayrolls = async () => {
@@ -127,9 +130,27 @@ function App() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleEmployeeSelect = (employee) => {
-    setSelectedEmployee(employee);
-  };
+  const handleEmployeeSelect = async (employee) => {
+    try {
+      fetchPayrollById(employee);
+    } catch (error) {
+        // ... error handling 
+    } finally {
+        setIsLoadingEmployee(false);
+    }
+};
+
+const fetchPayrollById = async (employee) => {
+  try {
+    const data = await GetPayrollById(employee.id);
+    console.log(data.result[0][0], 'data')
+    
+    setSelectedEmployee(data.result[0][0]);
+  } catch (error) {
+    console.error("Error fetching payrolls:", error);
+  }
+};
+
 
   const clearSelectedEmployee = () => {
     setSelectedEmployee(null);
@@ -152,6 +173,9 @@ function App() {
         {selectedEmployee && (
         <div className="employee-information">
           <h2 style={{ marginBottom: '35px' }}> Employee Information</h2>
+          {isLoadingEmployee ? (
+            <div>Loading payroll data...</div> 
+        ) : (
           <form>
             <div className="form-wrapper">
               <div className="left-column">
@@ -172,6 +196,7 @@ function App() {
               </div>
             </div>  
           </form>
+          )}
         </div>
       )}
       </div>

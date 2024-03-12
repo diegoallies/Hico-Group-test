@@ -23,6 +23,7 @@ db.connect(async (error) => {
     payrollController.createTableIfNotExists(db);
     payrollController.updatePayrollSpInit(db);
     payrollController.deletePayrollSpInit(db);
+    payrollController.ShowSinglePayrollSpInit(db);
 
   });
 });

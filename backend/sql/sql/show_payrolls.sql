@@ -1,1 +1,9 @@
-SELECT * FROM payroll_list;
+SELECT
+    id,
+    employeeId,
+    firstName,
+    lastName,
+    salutation,
+    employeeProfileColor
+FROM
+    payroll_list;

@@ -80,6 +80,17 @@ exports.deletePayrollSpInit = (db) => {
   });
 };
 
+// CREATE SP for viewing individual payroll
+exports.ShowSinglePayrollSpInit = (db) => {
+  db.query(sqlQueries.ShowSinglePayrollSpInit, (err) => {
+    if (err) {
+      console.error("Error creating sp delete:", err);
+    } else {
+      console.log("SP view single CREATED SUCCESSFULLY");
+    }
+  });
+};
+
 
 
 
@@ -107,15 +118,6 @@ exports.showpayrolls = (req, res) => {
   });
 };
 
-//SHOW SINGLE payroll
-exports.singlepayroll = (req, res) => {
-  const q = sqlQueries.showSinglePayrollQuery(req.params.id);
-
-  db.query(q, (err, result) => {
-    if (err) return res.json(err);
-    return res.status(200).json(result[0]);
-  });
-};
 
 
 
@@ -166,3 +168,23 @@ exports.deleteSinglepayroll = (req, res) => {
     return res.status(200).json({ data: "payroll deleted" });
   });
 };
+
+//show SINGLE payroll
+exports.singlepayroll = (req, res) => {
+  const q = sqlQueries.showSinglePayrollQuery(req.params.id);
+
+  db.query(q, (err, result) => {
+    if (err) return res.json(err);
+    return res.status(200).json({ result });
+  });
+};
+
+//SHOW SINGLE payroll
+// exports.singlepayroll = (req, res) => {
+//   const q = sqlQueries.showSinglePayrollQuery(req.params.id);
+
+//   db.query(q, (err, result) => {
+//     if (err) return res.json(err);
+//     return res.status(200).json(result[0]);
+//   });
+// };
