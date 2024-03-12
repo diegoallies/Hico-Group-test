@@ -1,16 +1,13 @@
-/* App.css */
-
 body {
-  font-size: 15px; 
+  font-size: 15px;
   margin: 0;
 }
 
 .container {
-  margin: 15px; /* Reduced margin */
+  margin: 15px;
   margin-left: 12.5%;
   margin-left: 12.5%;
   width: 80%;
-
 }
 
 .content {
@@ -19,7 +16,7 @@ body {
 
 .employee-list {
   background-color: #f0f0f0;
-  padding: 15px; /* Reduced padding */
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -27,8 +24,8 @@ body {
 
 .employee-information {
   height: 400px;
-  margin-top: 20px; /* Adjusted margin top */
-  padding: 20px; /* Reduced padding */
+  margin-top: 20px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f0f0f0;
@@ -41,11 +38,12 @@ body {
   margin-top: 20px;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   border: 1px solid #ddd;
-  padding: 8px; /* Reduced padding */
+  padding: 8px;
   text-align: left;
-  font-size: 14px; /* Reduced font size */
+  font-size: 14px;
 }
 
 .table th {
@@ -86,7 +84,6 @@ body {
   flex-grow: 1;
 }
 
-
 .left-column,
 .right-column {
   flex: 1;
@@ -118,7 +115,7 @@ label {
 
 .color-options {
   display: flex;
-  gap: 18px; /* Adjust the gap as needed */
+  gap: 18px;
 }
 
 .color-options label {
@@ -127,7 +124,7 @@ label {
 }
 
 .color-options input {
-  margin-right: 5px; /* Adjust the margin as needed */
+  margin-right: 5px;
 }
 .btn {
   margin-left: 20px;
@@ -135,14 +132,14 @@ label {
   margin-top: 35px;
 }
 .btn-success {
-  background-color: #A4BEDB; /* New color */
+  background-color: #a4bedb;
   color: #012340;
   border: 1px solid #012340;
-  padding: 12px 18px; /* Adjusted padding for a more balanced look */
+  padding: 12px 18px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s; /* Smooth transition on hover */
+  transition: background-color 0.3s;
 }
 .headd {
   display: flex;
@@ -150,47 +147,43 @@ label {
   align-items: center;
 }
 
-/* App.css */
-
 .table tr {
-  cursor: pointer; /* Set cursor to pointer on table rows */
+  cursor: pointer;
 }
 
 .table tr:hover {
   background-color: #f5f5f5;
-  cursor: pointer; /* Set cursor to pointer on hover */
+  cursor: pointer;
 }
-
 
 .btn-danger {
-  background-color: #A4BEDB; /* New color */
-  color: #BB2D3B;
-  border: 1px solid #BB2D3B;
-  padding: 12px 18px; /* Adjusted padding for a more balanced look */
+  background-color: #a4bedb;
+  color: #bb2d3b;
+  border: 1px solid #bb2d3b;
+  padding: 12px 18px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s; /* Smooth transition on hover */
+  transition: background-color 0.3s;
 }
 .btn-warning {
-  background-color: #A4BEDB; /* New color */
-  color:  #012340;
-  border: 1px solid  #012340;
-  padding: 12px 18px; /* Adjusted padding for a more balanced look */
+  background-color: #a4bedb;
+  color: #012340;
+  border: 1px solid #012340;
+  padding: 12px 18px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s; 
+  transition: background-color 0.3s;
 }
 
 .btn-success:hover {
-  background-color: #012340; 
+  background-color: #012340;
 }
-
 
 .input-label {
   display: inline-block;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 .input-container {
@@ -200,7 +193,7 @@ label {
 }
 
 .input-container label {
-  flex: 0 0 2%; 
+  flex: 0 0 2%;
 }
 
 .input-container input {
@@ -215,20 +208,18 @@ label {
 
 .form-group label {
   margin-right: 8px;
-  width: 100px; 
+  width: 100px;
 }
 
 .form-control {
   flex: 1;
   box-sizing: border-box;
-  max-width: 100%; 
+  max-width: 100%;
 }
-
 
 .form-control.full-width {
-  width: 100%; 
+  width: 100%;
 }
-
 
 .checkbox-container {
   display: flex;
@@ -240,12 +231,11 @@ label {
 }
 
 .form-group .checkbox-container {
-  max-width: calc(100% - 120px); 
+  max-width: calc(100% - 120px);
 }
 
-
 .redProfile {
-  background-color: #f55656; 
+  background-color: #f55656;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -254,7 +244,7 @@ label {
 }
 
 .greenProfile {
-  background-color: #61a161; 
+  background-color: #61a161;
   color: white;
   border: none;
   padding: 10px 15px;
