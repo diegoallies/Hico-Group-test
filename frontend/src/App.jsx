@@ -64,7 +64,7 @@ const App = () => {
       salutation: "",
       gender: "",
       grossSalary: "",
-      employeeProfileColor: 'Default',
+      employeeProfileColor: "#A4BEDB", 
     });
   };
 
