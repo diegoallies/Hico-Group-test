@@ -134,7 +134,7 @@ function App() {
     try {
       fetchPayrollById(employee);
     } catch (error) {
-        // ... error handling 
+      console.error("Error fetching payrolls:", error);
     } finally {
         setIsLoadingEmployee(false);
     }
