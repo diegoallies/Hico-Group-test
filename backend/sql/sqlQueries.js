@@ -26,7 +26,6 @@ exports.deletePayrollSpInit = readSQLFile("delete_payroll_sp");
 exports.ShowSinglePayrollSpInit = readSQLFile("show_single_payroll_sp");
 
 exports.updatePayrollQuery = (id, employeeData) => {
-  console.log(employeeData, "employeeData");
   return `CALL update_payroll(
             ${mysql.escape(id)},
             ${mysql.escape(employeeData.employeeId)},

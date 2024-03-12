@@ -127,8 +127,6 @@ const App = () => {
   const fetchPayrollById = async (employee) => {
     try {
       const data = await GetPayrollById(employee.id);
-      console.log(data.result[0][0], 'data');
-
       setSelectedEmployee(data.result[0][0]);
     } catch (error) {
       console.error('Error fetching payrolls:', error);
