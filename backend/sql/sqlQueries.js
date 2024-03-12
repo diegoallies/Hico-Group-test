@@ -1,29 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deletePayrollQuery = exports.updatePayrollSpInit = exports.updatePayrollQuery = exports.showSinglePayrollQuery = exports.showPayrollsQuery = exports.createListQuery = exports.createTableQuery = exports.createDatabaseQuery = void 0;
-const fs = require('fs');
-const path = require('path');
-const mysql = require('mysql');
+exports.deletePayrollQuery =
+  exports.updatePayrollSpInit =
+  exports.updatePayrollQuery =
+  exports.showSinglePayrollQuery =
+  exports.showPayrollsQuery =
+  exports.createListQuery =
+  exports.createTableQuery =
+  exports.createDatabaseQuery =
+    void 0;
+const fs = require("fs");
+const path = require("path");
+const mysql = require("mysql");
 
-// Function to read SQL queries from files
 const readSQLFile = (fileName) => {
-    const filePath = path.join(__dirname, 'sql', `${fileName}.sql`);
-    return fs.readFileSync(filePath, 'utf-8');
+  const filePath = path.join(__dirname, "sql", `${fileName}.sql`);
+  return fs.readFileSync(filePath, "utf-8");
 };
-exports.createDatabaseQuery = readSQLFile('create_database');
-exports.createTableQuery = readSQLFile('create_table');
-exports.createListQuery = readSQLFile('insert_payroll');
-exports.showPayrollsQuery = readSQLFile('show_payrolls');
-// exports.showSinglePayrollQuery = readSQLFile('show_single_payroll');
-exports.updatePayrollSpInit = readSQLFile('update_payroll_sp');
-exports.deletePayrollSpInit = readSQLFile('delete_payroll_sp');
-exports.ShowSinglePayrollSpInit = readSQLFile('show_single_payroll_sp');
-
+exports.createDatabaseQuery = readSQLFile("create_database");
+exports.createTableQuery = readSQLFile("create_table");
+exports.createListQuery = readSQLFile("insert_payroll");
+exports.showPayrollsQuery = readSQLFile("show_payrolls");
+exports.updatePayrollSpInit = readSQLFile("update_payroll_sp");
+exports.deletePayrollSpInit = readSQLFile("delete_payroll_sp");
+exports.ShowSinglePayrollSpInit = readSQLFile("show_single_payroll_sp");
 
 exports.updatePayrollQuery = (id, employeeData) => {
-    console.log(employeeData, 'employeeData')
-    // Option 1: Directly construct the query string
-    return `CALL update_payroll(
+  console.log(employeeData, "employeeData");
+  return `CALL update_payroll(
             ${mysql.escape(id)},
             ${mysql.escape(employeeData.employeeId)},
             ${mysql.escape(employeeData.firstName)},
@@ -32,15 +36,13 @@ exports.updatePayrollQuery = (id, employeeData) => {
             ${mysql.escape(employeeData.employeeProfileColor)},
             ${mysql.escape(employeeData.grossSalary)}, 
             ${mysql.escape(employeeData.gender)}
-        )`; 
+        )`;
 };
-  
 
 exports.deletePayrollQuery = (id) => {
-    return `CALL delete_payroll(${mysql.escape(id)})`; 
+  return `CALL delete_payroll(${mysql.escape(id)})`;
 };
 
 exports.showSinglePayrollQuery = (id) => {
-    return `CALL get_payroll_by_id(${mysql.escape(id)})`; 
+  return `CALL get_payroll_by_id(${mysql.escape(id)})`;
 };
-
