@@ -1,5 +1,3 @@
-Certainly! Here is a comprehensive README.md that combines all the information:
-
 ```markdown
 # <Diego_Allies_Assignment>
 
