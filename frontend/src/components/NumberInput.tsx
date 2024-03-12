@@ -9,7 +9,7 @@ const NumberInput = ({ label, value, onChange, className = "", disabled = false 
 
   return (
     <div className={`form-group ${className}`}>
-      <label>{label}:</label>
+      <label>{label}</label>
       <input
         type="text"
         className="form-control"

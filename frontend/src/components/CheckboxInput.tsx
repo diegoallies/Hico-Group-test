@@ -3,7 +3,7 @@ import React from "react";
 
 const CheckboxInput = ({ options, selectedValues, onChange }) => (
   <div className="form-group">
-    <label>Profile Color:</label>
+    <label>Profile Color</label>
     <div className="color-options">
       {options.map((option) => (
         <label key={option.value}>

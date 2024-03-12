@@ -3,7 +3,7 @@ import React from "react";
 
 const RadioInput = ({ options, selectedValue, onChange }) => (
   <div className="form-group" style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-    <label style={{ marginRight: "10px" }}>Gender:</label>
+    <label style={{ marginRight: "10px" }}>Gender</label>
     {options.map((option) => (
       <div key={option.value} style={{ display: "flex", alignItems: "center", marginRight: "15px" }}>
         <input
